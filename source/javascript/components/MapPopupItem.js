@@ -7,7 +7,7 @@ import './MapPopupItem.css';
 export default ({ popup, handleClosePopup }) => (
   <div className='popup-item'>
     <a href="javascript: void(null)" className={'popup-close'} onClick={handleClosePopup}>
-      <span>x</span>
+      <Icon name='close' style={{color: 'black'}} />
     </a>
     <div className='header-area'>
       <h1>

@@ -29,7 +29,7 @@ function swallowError (error) {
   this.emit('end')
 }
 
-gulp.task('default', ['build-css', 'build-js', 'inject', 'webserver', 'watch']);
+gulp.task('default', ['build-js', 'inject', 'webserver', 'watch']);
 
 // Watch JS hints
 gulp.task('jshint', function() {
@@ -193,7 +193,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('publish', function(done) {
-  runSequence('build-css', 'publish-js', 'publish-inject', 'prepare-export');
+  runSequence('publish-js', 'publish-inject', 'prepare-export');
 });
 
 gulp.task('prepare-export', function() {

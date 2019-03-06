@@ -7,4 +7,8 @@ export default styled.section`
     background-color: blue;
     display: flex;
     flex-direction: column;
+    
+    @media (max-width: 700px) {
+      width: 100%;
+    }
 `;

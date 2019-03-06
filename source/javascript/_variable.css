@@ -1,10 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,600,800|Zilla+Slab:400,600,700);
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
 :root {
-    --blue: #440099;
+    --blue: #1b3783;
     --lightgray: lightgray;
     --gray: #ccced0;
     --bluish-gray: #eaedef;
     --darkgray: rgba(21, 35, 45, 0.8);
-    --sans-serif: Klima, sans-serif;
+    --sans-serif: 'Montserrat', sans-serif;
+    --light-blue: rgba(68,0,153,.1);
+    --highlight: #ffb900;
 }
 
 .btn {
