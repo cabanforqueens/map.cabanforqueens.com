@@ -27,6 +27,7 @@ class MapContainer extends React.Component {
           eventsData={this.props.eventsData}
           handleFeatureClick={this.handleFeatureClick.bind(this)}
           clickedItem={this.state.clickedItem}
+          handleClosePopup= {this.handleClosePopup.bind(this)}
         />);
     }
 }

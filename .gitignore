@@ -7,7 +7,7 @@ dist/stylesheets/vendor/fonts
 **_BASE_**
 **_BACKUP_**
 
-public
+
 app
 dist
 .tmp/

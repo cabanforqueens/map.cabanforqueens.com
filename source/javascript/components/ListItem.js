@@ -11,7 +11,7 @@ export default (
         <div className='event-list-item-container'>
             <div className='event-list-item-type'>
                 <span>{event_type == "groups" ? 
-                    supergroup : (campaign_title || "events")}
+                    supergroup : (campaign_title || event_type)}
                 </span>
             </div>
             <h2 className='event-list-item-title'>
@@ -20,7 +20,7 @@ export default (
         
             {start_datetime  &&
                 <div className='event-list-item-date'>
-                    <Moment format='D MMM YYYY @ hh:mma'>{start_datetime}</Moment>
+                    <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 4 }}>{ start_datetime }</Moment>
                 </div>
             } 
 
@@ -33,7 +33,7 @@ export default (
             </div>
             
             <div className='event-list-item-cta'>
-                <a target='_blank' className='event-list-item-cta-btn btn' href={url || website}>CTA</a>
+                <a target='_blank' className='event-list-item-cta-btn btn' href={url || website}>RSVP</a>
             </div>
         </div>
     </li>

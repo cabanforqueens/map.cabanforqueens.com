@@ -4,14 +4,16 @@ import Moment from 'react-moment';
 
 import './MapPopupItem.css';
 
-export default ({ popup }) => (
+export default ({ popup, handleClosePopup }) => (
   <div className='popup-item'>
-    <Icon name='rocket' style={{color: 'black'}} size='2x' />
+    <a href="javascript: void(null)" className={'popup-close'} onClick={handleClosePopup}>
+      <span>x</span>
+    </a>
     <div className='header-area'>
       <h1>
-        <a href={`poprup.ul`} target='_blank'>{popup.title}</a>
+        <a href={popup.url} target='_blank'>{popup.title}</a>
       </h1>
-      <h3 className='event-type'><span>{popup.type}</span></h3>
+      <h3 className='event-type'><span>{popup.event_type}</span></h3>
     </div>
     <div className='content-area'>
       <div className='sponsor-area'>
@@ -20,9 +22,9 @@ export default ({ popup }) => (
       </div>
 
       <p className='time'>
-        <Moment format="DD MMM YYYY @ hh:mma">{ popup.date.toString() }</Moment>
+        <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 4 }}>{ popup.start_datetime }</Moment>
       </p>
-      <p className='address'>{ popup.address }</p>
+      <p className='address'>{ popup.venue }</p>
 
       <a href={ popup.url } target='_blank' className='rsvp'>RSVP</a>
     </div>
