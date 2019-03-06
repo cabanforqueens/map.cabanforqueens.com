@@ -6,7 +6,7 @@ class ListContainer extends React.Component {
     render() {
         return (
         <ListView
-            eventsData={this.props.eventsData}
+            eventsData={this.props.eventsData.sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))}
         />
         );
     }
