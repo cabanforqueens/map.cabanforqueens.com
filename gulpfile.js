@@ -104,6 +104,8 @@ gulp.task('publish-js', function() {
       },
       devtool: '#inline-source-map'
     }))
+    .on('error', swallowError)
+    .pipe(gulp.dest('public/assets/javascript'))
     // .on('error', swallowError)
     // .pipe(gulp.dest('.tmp/scripts'))
     // .pipe(sourcemaps.init({ loadMaps: true }))
@@ -113,8 +115,8 @@ gulp.task('publish-js', function() {
     // // .pipe(size({title: 'scripts'}))
     // .pipe(sourcemaps.write('.'))
     // .pipe(gulp.dest('public/assets/javascript'))
-    .on('error', swallowError)
-    .pipe(gulp.dest('public/assets/javascript'));
+    // .on('error', swallowError)
+    // .pipe(gulp.dest('public/assets/javascript'));
 
 
 })
@@ -172,7 +174,7 @@ gulp.task('publish-inject', function () {
 
   var target = gulp.src('source/html/index.html');
   // It's not necessary to read the files (will speed up things), we're only after their paths:
-  var sources = gulp.src(['public/assets/javascript/main.min.js',
+  var sources = gulp.src(['public/assets/javascript/main.js',
                           'public/assets/stylesheets/*.css'], {read: false})
                           .pipe(order([
                             'public/assets/stylesheets/*.css'
