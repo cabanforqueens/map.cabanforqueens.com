@@ -33,7 +33,7 @@ export default (
             </div>
             
             <div className='event-list-item-cta'>
-                <a target='_blank' className='event-list-item-cta-btn btn' href={url || website}>RSVP</a>
+                <a target='_blank' className='event-list-item-cta-btn megamap-btn' href={url || website}>RSVP</a>
             </div>
         </div>
     </li>
