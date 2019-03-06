@@ -45,7 +45,7 @@ gulp.task('build-js', function() {
       output: {
         filename: '[name].js'
       },
-      mode: 'development', 
+      mode: 'development',
       module: {
         rules: [
           {
@@ -59,8 +59,8 @@ gulp.task('build-js', function() {
               }
             }
           },
-          { 
-            test: /\.css$/, loader: "style-loader!css-loader" 
+          {
+            test: /\.css$/, loader: "style-loader!css-loader"
           }
         ]
       },
@@ -191,7 +191,7 @@ gulp.task('publish', function(done) {
 gulp.task('prepare-export', function() {
   gulp.src('app/index.html')
     .pipe(gulp.dest('dist'));
-  gulp.src(['public/assets/javascript/main.min.js'])
+  gulp.src(['public/assets/javascript/main.js'])
       .pipe(gulp.dest('dist/javascript'));
 
   gulp.src(['public/assets/stylesheets/**/*'])
