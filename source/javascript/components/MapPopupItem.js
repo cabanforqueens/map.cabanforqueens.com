@@ -22,7 +22,7 @@ export default ({ popup, handleClosePopup }) => (
       </div>
 
       <p className='time'>
-        <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 4 }}>{ popup.start_datetime }</Moment>
+        <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 5 }}>{ popup.start_datetime }</Moment>
       </p>
       <p className='address'>{ popup.venue }</p>
 

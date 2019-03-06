@@ -20,7 +20,7 @@ export default (
         
             {start_datetime  &&
                 <div className='event-list-item-date'>
-                    <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 4 }}>{ start_datetime }</Moment>
+                    <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 5 }}>{ start_datetime }</Moment>
                 </div>
             } 
 
