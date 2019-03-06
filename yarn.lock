@@ -3149,6 +3149,10 @@ group-array@^0.3.0:
     split-string "^1.0.1"
     union-value "^0.2.3"
 
+growl@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.0.tgz#d6f18c34827383bd89fbd3f03131927c3b7159af"
+
 growl@1.7.x:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.7.0.tgz#de2d66136d002e112ba70f3f10c31cf7c350b2da"
