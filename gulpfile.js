@@ -83,6 +83,7 @@ gulp.task('publish-js', function() {
       output: {
         filename: '[name].js'
       },
+      mode: 'development',
       module: {
         rules: [
           {
@@ -95,19 +96,24 @@ gulp.task('publish-js', function() {
                 "@babel/react"]
               }
             }
+          },
+          {
+            test: /\.css$/, loader: "style-loader!css-loader"
           }
         ]
       },
       devtool: '#inline-source-map'
     }))
+    // .on('error', swallowError)
+    // .pipe(gulp.dest('.tmp/scripts'))
+    // .pipe(sourcemaps.init({ loadMaps: true }))
+    // .pipe(uglify())
+    // .pipe(rename('main.min.js'))
+    // // Output files
+    // // .pipe(size({title: 'scripts'}))
+    // .pipe(sourcemaps.write('.'))
+    // .pipe(gulp.dest('public/assets/javascript'))
     .on('error', swallowError)
-    .pipe(gulp.dest('.tmp/scripts'))
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
-    .pipe(rename('main.min.js'))
-    // Output files
-    // .pipe(size({title: 'scripts'}))
-    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/assets/javascript'));
 
 
@@ -191,7 +197,7 @@ gulp.task('publish', function(done) {
 gulp.task('prepare-export', function() {
   gulp.src('app/index.html')
     .pipe(gulp.dest('dist'));
-  gulp.src(['public/assets/javascript/main.js'])
+  gulp.src(['public/assets/javascript/main.min.js'])
       .pipe(gulp.dest('dist/javascript'));
 
   gulp.src(['public/assets/stylesheets/**/*'])
