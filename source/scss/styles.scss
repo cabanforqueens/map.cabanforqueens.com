@@ -1,0 +1,123 @@
+@import 'fonts';
+@import 'vars';
+
+html, body {
+  height: 100%;
+  font-size:16px;
+}
+img, iframe{
+  max-width:100%;
+}
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+a {
+  color: $indigo;
+  &:hover {
+    color: $light-indigo;
+    text-decoration: none;
+  }
+}
+.leaflet-container a{
+  color:$indigo;
+
+  &:hover {
+    color: $light-indigo;
+    text-decoration: none;
+  }
+}
+.btn.btn-primary {
+  background-color:$teal;
+  border-color:$teal;
+  color:#fff;
+  font-weight:bold;
+  &:hover {
+    background-color: $blue;
+  }
+}
+.btn.btn-secondary {
+  background-color:transparent;
+  border-color: $indigo;
+  border-width:2px;
+  border-style:solid;
+  color:$indigo;
+  &:hover {
+    background-color: $indigo;
+    color:#fff;
+  }
+}
+.btn.btn-tertiary {
+  background-color:#d4d6d7;
+  border-color:#d4d6d7;
+  border-width:1px;
+  border-style:solid;
+  &:hover {
+    background-color:#c4c6c7;
+  }
+}
+
+#stage {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+
+  width: 1px;
+  min-width: 100%;
+  *width: 100%;
+
+  @import 'components/header';
+
+  div#activity-area {
+    background-color: green;
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+
+
+    @import 'components/map';
+    @import 'components/events_list';
+    @import 'components/embed';
+
+    #events-list-container  {
+      #events-list {
+        // ul li { display: none; }
+
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+
+        li.group-obj {
+          display: block;
+          // &:not(.within-bound) { display: none !important; }
+        }
+        &.events li.event-obj {
+          display: block;
+
+          // &:not(.within-bound) { display: none !important; }
+        }
+      }
+    }
+
+
+  }
+}
+
+@media(min-width: 600px) {
+
+  body.filter-collapsed {
+    #stage div#activity-area section#events-list-container  {
+      max-width: 0;
+    }
+
+    #stage #map {
+      #show-hide-list-container {
+        left: -32px !important;
+        #hide-list-text { display: none !important; }
+        #show-list-text { display: block !important; }
+      }
+    }
+  }
+}
+@import 'mobile/mobile';
+@import 'components/multiselect';

@@ -1,0 +1,197 @@
+section#map {
+  flex-grow: 1;
+  background-color: whitesmoke;
+  font-size:1rem;
+  z-index: 0;
+  @include klima;
+  position: relative;
+  #show-hide-container {
+    position: absolute;
+    z-index: 1000;
+    left: 28px;
+    top: 160px;
+    #show-hide-list-container {
+        background-color: $indigo;
+        transform: rotate(90deg);
+        transform-origin: left top;
+        padding: 5px 10px 5px;
+        color: white;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: $font-fam;
+        letter-spacing: 1px;
+        border-radius: 4px 4px 0 0;
+        display: inline-block;
+        #hide-list-text { display: block; }
+        #show-list-text { display: none; }
+    }
+  }
+
+
+  div#map-proper {
+    width: 100%;
+    height: 100%;
+
+    img.leaflet-marker-icon.annotation-popup.leaflet-zoom-animated.leaflet-interactive {
+      z-index: 10000 !important;
+    }
+    img.leaflet-marker-icon.events.event-item-popup.event-past-event.leaflet-zoom-animated.leaflet-interactive {
+      z-index: 0 !important;
+    }
+  }
+
+    .leaflet-container a.leaflet-popup-close-button {
+      top: 10px;
+      right: 10px;
+    }
+    .leaflet-popup-content-wrapper, div.mapboxgl-popup {
+      border-radius:5px;
+      // max-height:300px;
+      overflow: auto;
+      .popup-item.annotation {
+        iframe { width: 100% !important; }
+      }
+    }
+    .event-date, .event-address, .group-location.location, .group-description{
+      color:rgba(21,35,45,0.8);
+      font-size:0.95em;}
+    .event-date, .group-location.location{
+      font-weight:bold;}
+    div.leaflet-popup-content, div.mapboxgl-popup-content {
+      font-size:0.85rem;
+      line-height:1.5;
+      min-width: 350px;
+      max-width: 350px;
+      padding:1rem 1.1rem;
+      // margin: 10px;
+
+      button.mapboxgl-popup-close-button {
+        font-size: 24px; 
+        padding-right:10px;
+      }
+      p{
+        margin-top:0;}
+      @include event-item {
+        a.btn-primary { color: white; }
+        .event-title,
+        .group-header{
+          margin-bottom:0.5rem;}
+      };
+    }
+
+  &.zoomed-out {
+    img.local-groups, img.fossil-free-groups, img.regional-hubs {
+      width: 11px !important;
+      height: 11px !important;
+      margin-top: 0px !important;
+      margin-left: -3px !important;
+    }
+
+    img.events {
+      width: 9px !important;
+      height: 9px !important;
+      margin-top: 0px !important;
+      margin-left: 0px !important;
+    }
+  }
+
+
+
+
+  // slider
+  #slider-area {
+    position: absolute;
+    z-index: 100;
+    top: 5px;
+    left: 5px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    .slidecontainer {
+        width: 100%; /* Width of the outside container */
+        text-align: center;
+    }
+    input[type=range][orient=vertical]
+    {
+        writing-mode: bt-lr; /* IE */
+        -webkit-appearance: slider-vertical; /* WebKit */
+        width: 8px;
+        height:110px;
+        height:calc(100px + 5vh);
+        padding: 0 5px;
+        margin-left: -2px;
+    }
+
+    /* The slider itself */
+    .slider {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%; /* Full-width */
+        height: 25px; /* Specified height */
+        background: #d3d3d3; /* Grey background */
+        outline: none; /* Remove outline */
+        opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+    }
+
+    /* Mouse-over effects */
+    .slider:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+    }
+
+    // /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+    // .slider::-webkit-slider-thumb {
+    //     -webkit-appearance: none; /* Override default look */
+    //     appearance: none;
+    //     width: 25px; /* Set a specific slider handle width */
+    //     height: 25px; /* Slider handle height */
+    //     background: #4CAF50; /* Green background */
+    //     cursor: pointer; /* Cursor on hover */
+    // }
+    //
+    // .slider::-moz-range-thumb {
+    //     width: 25px; /* Set a specific slider handle width */
+    //     height: 25px; /* Slider handle height */
+    //     background: #4CAF50; /* Green background */
+    //     cursor: pointer; /* Cursor on hover */
+    // }
+
+    a.zm-butt {
+      align-items:center;
+      height: 24px;
+      width: 24px;
+      color: #333;
+      background-color: whitesmoke;
+      border-radius: 2px;
+      display:flex;
+      font-size:11px;
+      justify-content:center;
+      padding: 2px 0 0 1px;
+      text-align: center;
+      box-shadow: 1px 0 2px rgba(0,0,0,0.1);
+      border: 1px solid lightgray;
+      position: relative;
+    }
+    a.zm-out {
+      margin-top: -7px;
+    }
+    // a.zm-butt::after {
+    //     content: '';
+    //     position: absolute;
+    //     border-radius: 25px;
+    //     left: 0;
+    //     top: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.27) 1%, rgba(255, 255, 255, 0) 32%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.3) 100%);
+    //     background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.27) 1%, rgba(255, 255, 255, 0) 32%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.3) 100%);
+    //     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.27) 1%, rgba(255, 255, 255, 0) 32%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.3) 100%);
+    //     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4dffffff', endColorstr='#4d000000',GradientType=0 );
+    // }
+  }
+
+}
