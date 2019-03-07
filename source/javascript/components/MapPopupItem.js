@@ -16,10 +16,10 @@ export default ({ popup, handleClosePopup }) => (
       <h3 className='event-type'><span>{popup.event_type}</span></h3>
     </div>
     <div className='content-area'>
-      <div className='sponsor-area'>
+      {popup.sponsor && <div className='sponsor-area'>
         <sub>Hosted<br/>by</sub>
         <h3><img src={popup.logo}></img> <span>{popup.sponsor}</span></h3>
-      </div>
+      </div>}
 
       <p className='time'>
         <Moment format="DD MMM YYYY @ hh:mma" add={{ hours: 5 }}>{ popup.start_datetime }</Moment>
