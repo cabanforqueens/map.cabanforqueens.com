@@ -6,4 +6,8 @@ export default styled.div`
     height: 100%;
     display: flex;
     flex-direction: row;
+    
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+    }
 `;

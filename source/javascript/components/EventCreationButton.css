@@ -1,3 +1,4 @@
+
 div.host-btn-container {
     position: absolute;
     top: 10px;
@@ -20,9 +21,26 @@ div.host-btn-container a.host-btn {
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 1px;
+
+    border-radius: 0;
 }
 
 div.host-btn-container a.host-btn:hover {
     background-color: var(--blue);
     color: white;
+}
+
+@media screen and (max-width: 600px) {
+    div.host-btn-container { 
+        position: relative;
+        top: auto;
+        right: auto;
+    }    
+
+    div.host-btn-container a.host-btn {
+        width: 100%;
+        padding: 16px 0;
+        text-align: center;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+    }
 }
