@@ -1,0 +1,28 @@
+div.host-btn-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+div.host-btn-container a.host-btn {
+    background-color: var(--highlight);
+    display: inline-block;
+    color: var(--blue);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border-top: rgba(255,255,255,0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    font-family: var(--sans-serif);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+div.host-btn-container a.host-btn:hover {
+    background-color: var(--blue);
+    color: white;
+}

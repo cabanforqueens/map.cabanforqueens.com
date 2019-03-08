@@ -10,6 +10,8 @@ import MapContainer from './MapContainer';
 import ListContainer from './ListContainer';
 import SearchContainer from './SearchContainer';
 
+import EventCreationButton from '../components/EventCreationButton'
+
 class Megamap extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +21,7 @@ class Megamap extends React.Component {
     render() {
         return (
             <Page>
+                <EventCreationButton />
                 <ListArea>
                     
                     <ListContainer />

@@ -1,9 +1,10 @@
 import React from 'react';
 import MapPopupItem from './MapPopupItem';
+import EventCreationButton from './EventCreationButton';
 const ReactMapboxGl = require("react-mapbox-gl");
 import './MapView.css';
 
-const {Layer, Feature, Popup}  = ReactMapboxGl;
+const {Layer, Feature, Popup, ZoomControl}  = ReactMapboxGl;
 
 console.log(ReactMapboxGl);
 
@@ -18,8 +19,6 @@ class MapView extends React.Component {
     }
 
     componentDidMount() {
-        console.log("this.props.eventsData", this.props.eventsData);
-        console.log("component did mount");
     }
 
     handleStyleLoad(map) {
@@ -54,6 +53,7 @@ class MapView extends React.Component {
               height: "100%",
               width: "100%"
             }}>
+              <ZoomControl position='top-left'/>
               <Layer
                   type="circle"
                   id="marker"

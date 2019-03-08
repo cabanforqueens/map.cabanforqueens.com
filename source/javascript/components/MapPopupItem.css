@@ -70,6 +70,11 @@
 
 }
 
+.popup-item a.rsvp:hover {
+    background-color: var(--blue);
+    color: white;
+}
+
 .popup-item p {
     font-size: 14px;
     line-height: 24px;
