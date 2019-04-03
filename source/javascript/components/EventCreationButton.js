@@ -5,6 +5,6 @@ import './EventCreationButton.css';
 
 export default () => (
   <div className='host-btn-container'>
-    <a href='//bit.ly/CabanOnTheBallot' target='_blank' className='host-btn'>📋Host a Ballot Petition</a>
+    <a href='https://actionnetwork.org/events/new?event_campaign_id=7190' target='_blank' className='host-btn'>Host a Canvassing Event</a>
   </div>
 )
