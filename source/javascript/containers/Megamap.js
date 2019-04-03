@@ -18,12 +18,13 @@ class Megamap extends React.Component {
     }
 
     //<SearchContainer />
+    // <EventCreationButton />
     render() {
         return (
             <Page>
-                <EventCreationButton />
+
                 <ListArea>
-                    
+
                     <ListContainer />
                 </ListArea>
                 <MapArea>
