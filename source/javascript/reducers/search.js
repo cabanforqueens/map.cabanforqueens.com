@@ -5,7 +5,7 @@ import {
   SEARCH_ERROR_RESULTS,
   SEARCH_SET_SELECTED_RESULT } from '../actions/actionTypes';
 
-import zipcodes from '../assets/zipcodes.json';
+import zipcodes from '../assets/data/zipcodes.json';
 
 const defaultState = {
     searchQuery: '',
@@ -15,7 +15,8 @@ const defaultState = {
     bounds: {},
     searchResults: [],
     chosenResult: null,
-    zipcodes: zipcodes
+    zipcodes: zipcodes,
+    chosenZip: null
 };
 
 export default function (state=defaultState, action) {

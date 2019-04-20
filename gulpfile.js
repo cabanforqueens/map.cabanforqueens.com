@@ -61,13 +61,25 @@ gulp.task('build-js', function() {
           },
           {
             test: /\.css$/, loader: "style-loader!css-loader"
-          }
+          },
+          {
+            test: /\.(png|jpg|gif)$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  outputPath: 'images',
+                  // publicPath: 'images'
+                },
+              },
+            ],
+          },
         ]
       },
       devtool: '#inline-source-map'
     }))
     .on('error', swallowError)
-    .pipe(gulp.dest('public/assets/javascript'))
+    .pipe(gulp.dest('app'))
     // .pipe(sourcemaps.init({ loadMaps: true }))
     // .pipe(uglify())
     // .pipe(rename('main.min.js'))
@@ -99,13 +111,25 @@ gulp.task('publish-js', function() {
           },
           {
             test: /\.css$/, loader: "style-loader!css-loader"
-          }
+          },
+          {
+            test: /\.(png|jpg|gif)$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  outputPath: 'images'
+                },
+              },
+            ],
+          },
+          
         ]
       },
       devtool: '#inline-source-map'
     }))
     .on('error', swallowError)
-    .pipe(gulp.dest('public/assets/javascript'))
+    .pipe(gulp.dest('app'))
     // .on('error', swallowError)
     // .pipe(gulp.dest('.tmp/scripts'))
     // .pipe(sourcemaps.init({ loadMaps: true }))
@@ -122,20 +146,20 @@ gulp.task('publish-js', function() {
 })
 
 // Watch SASS Files
-gulp.task('build-css', function() {
-    return gulp.src('source/scss/**/*.scss')
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('public/assets/stylesheets'))
-        .pipe(bs.reload({
-            stream: true
-        }));
-});
+// gulp.task('build-css', function() {
+//     return gulp.src('source/scss/**/*.scss')
+//         .pipe(sourcemaps.init())
+//         .pipe(sass())
+//         .pipe(sourcemaps.write('.'))
+//         .pipe(gulp.dest('public/assets/stylesheets'))
+//         .pipe(bs.reload({
+//             stream: true
+//         }));
+// });
 
 // Webservice
 gulp.task('webserver', function() {
-  gulp.src(['app', 'public/assets'])
+  gulp.src(['app'])
     .pipe(webserver({
       livereload: true,
     }));
@@ -152,14 +176,15 @@ gulp.task('inject', function () {
 
   var target = gulp.src('source/html/index.html');
   // It's not necessary to read the files (will speed up things), we're only after their paths:
-  var sources = gulp.src(['public/assets/javascript/main.js',
-                          'public/assets/stylesheets/*.css'], {read: false})
-                          .pipe(order([
-                            'public/assets/stylesheets/*.css'
-                          ], { base: './' }))
+  var sources = gulp.src(['app/main.js'], { base: './' })
                       .pipe(hash(opts));
 
-  return target.pipe(inject(sources, { ignorePath: 'public/assets' }))
+  return target.pipe(inject(sources, { 
+                        ignorePath: 'app/assets',
+                        transform: function (filepath, file, i, length) {
+                          return "<script src='" + filepath.replace('/app/', '/') + "'></script>'";
+                        }
+                    }))
     .pipe(gulp.dest('app'));
 });
 
@@ -174,15 +199,16 @@ gulp.task('publish-inject', function () {
 
   var target = gulp.src('source/html/index.html');
   // It's not necessary to read the files (will speed up things), we're only after their paths:
-  var sources = gulp.src(['public/assets/javascript/main.js',
-                          'public/assets/stylesheets/*.css'], {read: false})
-                          .pipe(order([
-                            'public/assets/stylesheets/*.css'
-                          ], { base: './' }))
+  var sources = gulp.src(['app/main.js'], { base: './' })
                       .pipe(hash(opts));
 
-  return target.pipe(inject(sources, { ignorePath: 'public/assets' }))
-    .pipe(gulp.dest('app'));
+  return target.pipe(inject(sources, { 
+                              ignorePath: 'app/assets',
+                              transform: function (filepath, file, i, length) {
+                                return "<script src='" + filepath.replace('/app/', '/') + "'></script>'";
+                              }
+                          }))
+                          .pipe(gulp.dest('app'));
 });
 
 

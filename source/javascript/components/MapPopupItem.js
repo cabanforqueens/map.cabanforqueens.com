@@ -18,7 +18,7 @@ export default ({ popup, handleClosePopup }) => (
     <div className='content-area'>
       {popup.sponsor && <div className='sponsor-area'>
         <sub>Hosted<br/>by</sub>
-        <h3><img src={popup.logo}></img> <span>{popup.sponsor}</span></h3>
+        <h3><img src={require(`../assets/images/logo/${popup.logo}`)}></img> <span>{popup.sponsor}</span></h3>
       </div>}
 
       <p className='time'>

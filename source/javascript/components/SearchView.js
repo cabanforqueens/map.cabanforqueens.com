@@ -1,6 +1,8 @@
 import React from 'react';
 import SearchSuggestion from './SearchSuggestion';
 import './SearchView.css';
+import MeetEventsIcon from '../assets/images/meet-events.png';
+import VolunteerEventsIcon from '../assets/images/volunteer-events.png';
 export default ({
   handleSearch,
   searchResults,
@@ -25,15 +27,11 @@ export default ({
                 <ul>
                     <li>
                         <input type="checkbox" name='f[]' value='events' id='events'/>
-                        <label htmlFor='events'><img src='/img/event.png' /><span>Events</span></label>
+                        <label htmlFor='events'><img src={VolunteerEventsIcon} /><span>Volunteer for Tiffany</span></label>
                     </li>
                     <li>
                         <input type="checkbox" name='f[]' value='local-groups' id='local-groups'/>
-                        <label htmlFor='local-groups'><img src='/img/group.png' /><span>Local Groups</span></label>
-                    </li>
-                    <li>
-                        <input type="checkbox" name='f[]' value='regional-groups' id='regional-groups'/>
-                        <label htmlFor='regional-groups'><img src='/img/flag.png' /><span>Regional Groups</span></label>
+                        <label htmlFor='local-groups'><img src={MeetEventsIcon} /><span>Meet Tiffany</span></label>
                     </li>
 
                 </ul>
