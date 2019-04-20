@@ -32,7 +32,6 @@ class MapContainer extends React.Component {
     }
 
     render() {
-        console.log("chosenZipcode ", this.props.chosenZipcode, this.props.center)
         return (<MapView
           volunteerData={this.props.volunteerData}
           meetData={this.props.meetData}

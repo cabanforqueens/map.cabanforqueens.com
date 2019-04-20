@@ -16,7 +16,6 @@ class SearchContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this);
     this.props.history.listen((location, action) => {
       if (action == "POP") {
         this.handleHistoryChange(location);
@@ -30,7 +29,6 @@ class SearchContainer extends React.Component {
 
   handleHistoryChange(location) {
     const query = new URLSearchParams(location.search);
-    console.log("Going to Location", location);
 
     if (!query.get("zipcode") & !query.get("types")) {
       this.props.updateMap(null, [ -73.834, 40.676], [10]);

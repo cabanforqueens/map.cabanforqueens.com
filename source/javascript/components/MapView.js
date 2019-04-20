@@ -31,11 +31,6 @@ class MapView extends React.Component {
       });
 
       this.map = map;
-
-      // console.log(map.getCenter(), map.getZoom());
-      // this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
-      // console.log("~~~ GETTING -- ", this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676]);
-      // console.log("~~~ ZOOMING -- ", this.props.zoom || this.props.initZoom && [parseFloat(this.props.initZoom)] || [10])
       
       this.props.handleMapLoad(map);
 
@@ -56,12 +51,6 @@ class MapView extends React.Component {
     }
 
     render() {
-        // console.log("GETTING -- ", this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676],
-        //   "xxx", this.props.center,  [ -73.834, 40.676]
-        // )
-        // console.log("GETTING -- ", this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676]);
-        // console.log("ZOOMING -- ", this.props.zoom || this.props.initZoom && [parseFloat(this.props.initZoom)] || [10])
-        // console.log("NEW :: ", this.props.center || [ -73.834, 40.676])
         return (<div className='map-area'>
           <Map
             ref={e => {
