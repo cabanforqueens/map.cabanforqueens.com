@@ -29,12 +29,16 @@ class MapContainer extends React.Component {
           handleFeatureClick={this.handleFeatureClick.bind(this)}
           clickedItem={this.state.clickedItem}
           handleClosePopup= {this.handleClosePopup.bind(this)}
+
+          showMeet={this.props.activeFilters.includes("Meet Tiffany")}
+          showVolunteer={this.props.activeFilters.includes("Volunteer for Tiffany")}
         />);
     }
 }
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, search }) => ({
   volunteerData: events.eventsData.filter(i => i.event_type == "Volunteer for Tiffany"),
-  meetData: events.eventsData.filter(i => i.event_type == "Meet Tiffany")
+  meetData: events.eventsData.filter(i => i.event_type == "Meet Tiffany"),
+  activeFilters: search.activeFilters
 })
 export default connect(mapStateToProps)(MapContainer);

@@ -49,6 +49,17 @@ class SearchContainer extends React.Component {
     this.props.selectResult(item);
   }
 
+  handleFilterChange(event) {
+    const filter = event.target.value;
+
+    if ( this.props.activeFilters.includes(filter) ) {
+      //remove filter
+      this.props.setFilters(this.props.activeFilters.filter(i => i !== filter));
+    } else { // add filter
+      this.props.setFilters([...this.props.activeFilters, filter]);
+    }
+  }
+
   render() {
       return <SearchView
         searchQuery={this.state.searchQuery}
@@ -59,6 +70,9 @@ class SearchContainer extends React.Component {
         handleKeyPress={this.handleKeyPress.bind(this)}
         searchResults={this.props.searchResults}
         selectResult={this.handleSelect.bind(this)}
+        showMeet={this.props.activeFilters.includes("Meet Tiffany")}
+        showVolunteer={this.props.activeFilters.includes("Volunteer for Tiffany")}
+        handleFilterChange={this.handleFilterChange.bind(this)}
       />;
   }
 }
@@ -82,6 +96,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     selectResult: (item) => {
       dispatch(searchAction.selectResult(item))
-    }
+    },
+    setFilters: (filters) => {
+      dispatch(searchAction.setFilters(filters))
+    },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

@@ -8,7 +8,10 @@ export default ({
   searchResults,
   selectResult,
   handleKeyPress,
-  searchQuery
+  searchQuery,
+  showVolunteer,
+  showMeet,
+  handleFilterChange
 }) => (
     <div className='search-container'>
         <div className='search-viewport'>
@@ -26,12 +29,15 @@ export default ({
             <form className='filter-form'>
                 <ul>
                     <li>
-                        <input type="checkbox" name='f[]' value='events' id='events'/>
-                        <label htmlFor='events'><img src={VolunteerEventsIcon} /><span>Volunteer for Tiffany</span></label>
+                        <input type="checkbox" name='f[]' value='Volunteer for Tiffany' 
+                            id='Volunteer for Tiffany' onChange={handleFilterChange} 
+                            checked={showVolunteer ? "checked" : false}/>
+                        <label htmlFor='Volunteer for Tiffany'><img src={VolunteerEventsIcon} /><span>Volunteer for Tiffany</span></label>
                     </li>
                     <li>
-                        <input type="checkbox" name='f[]' value='local-groups' id='local-groups'/>
-                        <label htmlFor='local-groups'><img src={MeetEventsIcon} /><span>Meet Tiffany</span></label>
+                        <input type="checkbox" name='f[]' onChange={handleFilterChange} 
+                                value='Meet Tiffany' id='Meet Tiffany'  checked={showMeet ? "checked" : false}/>
+                        <label htmlFor='Meet Tiffany'><img src={MeetEventsIcon} /><span>Meet Tiffany</span></label>
                     </li>
 
                 </ul>

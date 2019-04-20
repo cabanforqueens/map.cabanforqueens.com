@@ -12,9 +12,9 @@ class ListContainer extends React.Component {
     }
 }
 
-const mapStateToProps = ({ events }) => {
+const mapStateToProps = ({ events, search }) => {
     return {
-        eventsData: events.eventsData,
+        eventsData: events.eventsData.filter(item => search.activeFilters.includes(item.event_type)),
     };
 }
 

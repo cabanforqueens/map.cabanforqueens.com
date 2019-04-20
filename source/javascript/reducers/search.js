@@ -9,7 +9,7 @@ import zipcodes from '../assets/data/zipcodes.json';
 
 const defaultState = {
     searchQuery: '',
-    activeFilters: ['events', 'local-groups', 'regional-groups'],
+    activeFilters: ['Volunteer for Tiffany', 'Meet Tiffany'],
     zoomLevel: 10,
     center: {lat: 0, lng: 0},
     bounds: {},

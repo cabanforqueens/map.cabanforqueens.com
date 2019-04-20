@@ -57,6 +57,9 @@ class MapView extends React.Component {
               <Layer
                   type="circle"
                   id="volunteerData"
+                  layout={{
+                    'visibility': this.props.showVolunteer ? 'visible' : 'none',
+                  }}
                   paint={{
                     "circle-radius": 5,
                     "circle-color": "#440099",
@@ -75,6 +78,9 @@ class MapView extends React.Component {
               <Layer
                   type="circle"
                   id="meetData"
+                  layout={{
+                    'visibility': this.props.showMeet ? 'visible' : 'none',
+                  }}
                   paint={{
                     "circle-radius": 5,
                     "circle-color": "#c4b4dd",
