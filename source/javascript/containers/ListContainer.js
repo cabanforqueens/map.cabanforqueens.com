@@ -10,9 +10,10 @@ const inBounds = (ne, sw, lnglat) =>{
 
 class ListContainer extends React.Component {
     render() {
+        console.log("eventsData", this.props.eventsData);
         return (
         <ListView
-            eventsData={this.props.eventsData.sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))}
+            eventsData={this.props.eventsData}
         />
         );
     }
@@ -20,19 +21,30 @@ class ListContainer extends React.Component {
 
 const mapStateToProps = ({ events, search }) => {
     return {
-        eventsData: events.eventsData.filter(item => {
-            const show = search.activeFilters.includes(item.event_type)
+        eventsData: Object.values(
+            events.eventsData.filter(item => {
+                const show = search.activeFilters.includes(item.event_type)
 
-            if (!search.bounds) {
-                return show;
-            }
-    
-            return show && inBounds(
-                    search.bounds.northeast,
-                    search.bounds.southwest,
-                    {lng: item.lng, lat: item.lat});
+                if (!search.bounds) {
+                    return show;
+                }
+        
+                return show && inBounds(
+                        search.bounds.northeast,
+                        search.bounds.southwest,
+                        {lng: item.lng, lat: item.lat});
 
-        }),
+            }).reduce((acc, curr) => {
+                const key = `${curr.lng},${curr.lat}`;
+                if (acc && !acc[key]) {
+                    acc[key] = [curr];
+                } else {
+                    acc[key] = [...acc[key], curr]
+                }
+                return acc;
+            }, {})
+        )
+        ,
     };
 }
 
