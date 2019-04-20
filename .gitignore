@@ -12,3 +12,4 @@ app
 dist
 .tmp/
 yarn-error.log
+.swp

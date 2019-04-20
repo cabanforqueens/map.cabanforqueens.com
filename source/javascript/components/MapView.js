@@ -6,7 +6,7 @@ import './MapView.css';
 
 const {Layer, Feature, Popup, ZoomControl}  = ReactMapboxGl;
 
-console.log(ReactMapboxGl);
+
 
 const Map = ReactMapboxGl.Map({
   accessToken:
@@ -25,6 +25,14 @@ class MapView extends React.Component {
        this.map = map;
        map.setCenter({ lng: -73.834, lat: 40.676 });
        map.setZoom(10);
+      
+       map.on('moveend', (event) => {
+        this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
+      });
+
+      this.map = map;
+      this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
+      this.props.handleMapLoad(map);
     }
 
     renderPopup () {
@@ -40,7 +48,7 @@ class MapView extends React.Component {
     }
 
     render() {
-      console.log("this.props.clickedItem", this.props.clickedItem);
+      
         return (<div className='map-area'>
           <Map
             ref={e => {
@@ -49,6 +57,12 @@ class MapView extends React.Component {
             onStyleLoad={this.handleStyleLoad.bind(this)}
             style="mapbox://styles/rcscastillo/cjskbazaf34171gnxi5qfdeli"
             className='map-view-container'
+
+            zoom={this.props.zoom || this.props.initZoom && [parseFloat(this.props.initZoom)] || [10]}
+            interactive={true}
+            center={this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676]}
+            movingMethod={'easeTo'}
+
             containerStyle={{
               height: "100%",
               width: "100%"

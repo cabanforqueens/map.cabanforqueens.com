@@ -18,12 +18,11 @@ export default ({
             <form className='search-form' onSubmit={() => { return false; }}>
                 <input type='text'
                     className='search-text'
-                    placeholder='City, State, Country, and/or Zip Code'
+                    placeholder='Enter Zip Code'
                     onChange={handleSearch}
                     onKeyPress={handleKeyPress}
                     value={searchQuery}
                 />
-                <a href='javascript: void(null)' className='search-btn'>Search</a>
             </form>
 
             <form className='filter-form'>

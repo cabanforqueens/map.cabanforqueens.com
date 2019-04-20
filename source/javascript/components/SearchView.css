@@ -30,6 +30,8 @@
     border: 1px solid var(--lightgray);
     border-radius: 4px 0 0 4px;
     height: 25px;
+    text-align: center;
+    font-weight: 800;
 
     font-family: var(--sans-serif);
 }

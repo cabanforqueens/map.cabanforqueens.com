@@ -19,12 +19,15 @@ class SearchContainer extends React.Component {
 
   handleSearch(event) {
     this.props.clearSearchResults();
-    clearTimeout(this.geocodeTimeout);
-    this.setState({searchQuery: event.target.value}, () => {
-      this.geocodeTimeout = setTimeout(() => {
-        this.props.searchLocation(this.state.searchQuery);
-      }, 500);
+    this.setState({
+      searchQuery: event.target.value
+    }, () => {
+      if ( this.state.searchQuery.length == 5 ) {
+        
+        this.props.searchZipcode(this.state.searchQuery)
+      }
     })
+    
   }
 
   handleKeyPress(event) {
@@ -84,11 +87,15 @@ const mapStateToProps = ({ search }) => ({
     center: search.center,
     searchResults: search.searchResults.results,
     chosenResult: search.chosenResult,
-    bounds: search.bounds
+    bounds: search.bounds,
+
+    chosenZipcode: search.chosenZipcode,
+    zipcodes: search.zipcodes
+
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    searchLocation: (text) => {
+    searchZipcode: (text) => {
       dispatch(searchAction.search(text));
     },
     clearSearchResults: () => {

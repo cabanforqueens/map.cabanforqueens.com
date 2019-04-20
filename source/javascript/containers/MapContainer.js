@@ -1,6 +1,7 @@
 import React from 'react';
 import MapView from '../components/MapView';
 import MapPopupItem from '../components/MapPopupItem';
+import {searchAction} from '../actions/search';
 
 import { connect } from 'react-redux';
 
@@ -14,7 +15,7 @@ class MapContainer extends React.Component {
     }
 
     handleFeatureClick(item) {
-      console.log("handleFeatureClick", item);
+      
       this.setState({clickedItem: item});
     }
 
@@ -22,7 +23,16 @@ class MapContainer extends React.Component {
       this.setState({clickedItem: null});
     }
 
+    handleMapChange(bounds, center, zoom) {
+      this.props.updateMap({northeast: bounds.getNorthEast(), southwest: bounds.getSouthWest()}, [center.lng, center.lat], [zoom]);
+    }
+
+    handleMapLoad(map) {
+      this.props.setMap(map);
+    }
+
     render() {
+        
         return (<MapView
           volunteerData={this.props.volunteerData}
           meetData={this.props.meetData}
@@ -32,6 +42,13 @@ class MapContainer extends React.Component {
 
           showMeet={this.props.activeFilters.includes("Meet Tiffany")}
           showVolunteer={this.props.activeFilters.includes("Volunteer for Tiffany")}
+
+          center={this.props.center}
+          bounds={this.props.bounds}
+          zoom={this.props.zoom}
+
+          handleMapChange={this.handleMapChange.bind(this)}
+          handleMapLoad={this.handleMapLoad.bind(this)}
         />);
     }
 }
@@ -39,6 +56,17 @@ class MapContainer extends React.Component {
 const mapStateToProps = ({ events, search }) => ({
   volunteerData: events.eventsData.filter(i => i.event_type == "Volunteer for Tiffany"),
   meetData: events.eventsData.filter(i => i.event_type == "Meet Tiffany"),
-  activeFilters: search.activeFilters
+  activeFilters: search.activeFilters,
+  center: search.center,
+  bounds: search.bounds,
+  zoom: search.zoom
 })
-export default connect(mapStateToProps)(MapContainer);
+
+const mapDispatchToProps = (dispatch) => ({
+  updateMap: (bounds, center, zoom) => {
+    dispatch(searchAction.updateMap(bounds, center, zoom))
+  },
+  setMap: (map) => { dispatch(searchAction.setMap(map))}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);
