@@ -24,7 +24,8 @@ class MapContainer extends React.Component {
 
     render() {
         return (<MapView
-          eventsData={this.props.eventsData}
+          volunteerData={this.props.volunteerData}
+          meetData={this.props.meetData}
           handleFeatureClick={this.handleFeatureClick.bind(this)}
           clickedItem={this.state.clickedItem}
           handleClosePopup= {this.handleClosePopup.bind(this)}
@@ -33,6 +34,7 @@ class MapContainer extends React.Component {
 }
 
 const mapStateToProps = ({ events }) => ({
-  eventsData: events.eventsData
+  volunteerData: events.eventsData.filter(i => i.event_type == "Volunteer for Tiffany"),
+  meetData: events.eventsData.filter(i => i.event_type == "Meet Tiffany")
 })
 export default connect(mapStateToProps)(MapContainer);

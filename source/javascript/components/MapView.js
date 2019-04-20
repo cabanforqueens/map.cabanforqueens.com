@@ -56,7 +56,7 @@ class MapView extends React.Component {
               <ZoomControl position='top-left'/>
               <Layer
                   type="circle"
-                  id="marker"
+                  id="volunteerData"
                   paint={{
                     "circle-radius": 5,
                     "circle-color": "#440099",
@@ -64,13 +64,31 @@ class MapView extends React.Component {
                     "circle-stroke-color": "#ffb900"
                   }}>
                 {
-                  this.props.eventsData.map((data, ind) => (
+                  this.props.volunteerData.map((data, ind) => (
                       <Feature key={ind}
                         coordinates={[data.lng, data.lat]}
                         onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
                   ))
                 }
-            </Layer>
+              </Layer>
+
+              <Layer
+                  type="circle"
+                  id="meetData"
+                  paint={{
+                    "circle-radius": 5,
+                    "circle-color": "#c4b4dd",
+                    "circle-stroke-width": 2,
+                    "circle-stroke-color": "#440099"
+                  }}>
+                {
+                  this.props.meetData.map((data, ind) => (
+                      <Feature key={ind}
+                        coordinates={[data.lng, data.lat]}
+                        onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
+                  ))
+                }
+              </Layer>
 
             { this.props.clickedItem &&
               this.renderPopup()

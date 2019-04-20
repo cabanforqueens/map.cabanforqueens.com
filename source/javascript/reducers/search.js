@@ -5,6 +5,8 @@ import {
   SEARCH_ERROR_RESULTS,
   SEARCH_SET_SELECTED_RESULT } from '../actions/actionTypes';
 
+import zipcodes from '../assets/zipcodes.json';
+
 const defaultState = {
     searchQuery: '',
     activeFilters: ['events', 'local-groups', 'regional-groups'],
@@ -12,7 +14,8 @@ const defaultState = {
     center: {lat: 0, lng: 0},
     bounds: {},
     searchResults: [],
-    chosenResult: null
+    chosenResult: null,
+    zipcodes: zipcodes
 };
 
 export default function (state=defaultState, action) {
