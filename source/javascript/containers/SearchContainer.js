@@ -3,6 +3,7 @@ import React from 'react';
 import SearchView from '../components/SearchView';
 import { connect } from 'react-redux';
 import {searchAction} from '../actions/search';
+import history from '../history';
 
 class SearchContainer extends React.Component {
 
@@ -15,6 +16,36 @@ class SearchContainer extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this);
+    this.props.history.listen((location, action) => {
+      if (action == "POP") {
+        this.handleHistoryChange(location);
+      }
+    });
+
+    if (this.props.history.location.search !== "") {
+      this.handleHistoryChange(this.props.history.location);
+    }
+  }
+
+  handleHistoryChange(location) {
+    const query = new URLSearchParams(location.search);
+    console.log("Going to Location", location);
+
+    if (!query.get("zipcode") & !query.get("types")) {
+      this.props.updateMap(null, [ -73.834, 40.676], [10]);
+    }
+
+    if (query.get("zipcode") && query.get("zipcode").length == 5) {
+      this.setState({searchQuery: query.get("zipcode")})
+      this.props.searchZipcode(query.get("zipcode"));
+    }
+
+    if (query.get('types')) {
+      this.props.setFilters(query.get('types').split(","));
+    } else if (query.get("zipcode")) {
+      this.props.setFilters([]);
+    }
   }
 
   handleSearch(event) {
@@ -23,11 +54,14 @@ class SearchContainer extends React.Component {
       searchQuery: event.target.value
     }, () => {
       if ( this.state.searchQuery.length == 5 ) {
-        
-        this.props.searchZipcode(this.state.searchQuery)
+        this.props.searchZipcode(this.state.searchQuery);
+        this.handleHistoryPush(this.props.activeFilters);
       }
     })
-    
+  }
+
+  handleHistoryPush(types){
+    history.push(`?zipcode=${this.state.searchQuery}&types=${types.join(',')}`);
   }
 
   handleKeyPress(event) {
@@ -58,8 +92,10 @@ class SearchContainer extends React.Component {
     if ( this.props.activeFilters.includes(filter) ) {
       //remove filter
       this.props.setFilters(this.props.activeFilters.filter(i => i !== filter));
+      this.handleHistoryPush(this.props.activeFilters.filter(i => i !== filter));
     } else { // add filter
       this.props.setFilters([...this.props.activeFilters, filter]);
+      this.handleHistoryPush([...this.props.activeFilters, filter]);
     }
   }
 
@@ -95,6 +131,9 @@ const mapStateToProps = ({ search }) => ({
   });
 
 const mapDispatchToProps = (dispatch) => ({
+    updateMap: (bounds, center, zoom) => {
+      dispatch(searchAction.updateMap(bounds, center, zoom))
+    },
     searchZipcode: (text) => {
       dispatch(searchAction.search(text));
     },

@@ -23,16 +23,24 @@ class MapView extends React.Component {
 
     handleStyleLoad(map) {
        this.map = map;
-       map.setCenter({ lng: -73.834, lat: 40.676 });
-       map.setZoom(10);
+      //  map.setCenter({ lng: -73.834, lat: 40.676 });
+      //  map.setZoom(10);
       
        map.on('moveend', (event) => {
         this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
       });
 
       this.map = map;
-      this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
+
+      // console.log(map.getCenter(), map.getZoom());
+      // this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
+      // console.log("~~~ GETTING -- ", this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676]);
+      // console.log("~~~ ZOOMING -- ", this.props.zoom || this.props.initZoom && [parseFloat(this.props.initZoom)] || [10])
+      
       this.props.handleMapLoad(map);
+
+      this.props.center && map.setCenter({ lng: this.props.center[0], lat: this.props.center[1] });
+      this.props.center && map.setZoom(14);
     }
 
     renderPopup () {
@@ -48,7 +56,12 @@ class MapView extends React.Component {
     }
 
     render() {
-      
+        // console.log("GETTING -- ", this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676],
+        //   "xxx", this.props.center,  [ -73.834, 40.676]
+        // )
+        // console.log("GETTING -- ", this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676]);
+        // console.log("ZOOMING -- ", this.props.zoom || this.props.initZoom && [parseFloat(this.props.initZoom)] || [10])
+        // console.log("NEW :: ", this.props.center || [ -73.834, 40.676])
         return (<div className='map-area'>
           <Map
             ref={e => {
@@ -58,9 +71,9 @@ class MapView extends React.Component {
             style="mapbox://styles/rcscastillo/cjskbazaf34171gnxi5qfdeli"
             className='map-view-container'
 
-            zoom={this.props.zoom || this.props.initZoom && [parseFloat(this.props.initZoom)] || [10]}
+            zoom={this.props.zoom || [10]}
             interactive={true}
-            center={this.props.center || (this.props.initLatLng && this.props.initLatLng.split(',')) || [ -73.834, 40.676]}
+            center={this.props.center || [ -73.834, 40.676]}
             movingMethod={'easeTo'}
 
             containerStyle={{

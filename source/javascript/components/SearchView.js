@@ -22,7 +22,7 @@ export default ({
                     onChange={handleSearch}
                     onKeyPress={handleKeyPress}
                     value={searchQuery}
-                    maxlength={5}
+                    maxLength={5}
                 />
             </form>
 

@@ -32,7 +32,7 @@ class MapContainer extends React.Component {
     }
 
     render() {
-        
+        console.log("chosenZipcode ", this.props.chosenZipcode, this.props.center)
         return (<MapView
           volunteerData={this.props.volunteerData}
           meetData={this.props.meetData}
@@ -49,6 +49,8 @@ class MapContainer extends React.Component {
 
           handleMapChange={this.handleMapChange.bind(this)}
           handleMapLoad={this.handleMapLoad.bind(this)}
+
+          history={this.props.history}
         />);
     }
 }
@@ -59,7 +61,8 @@ const mapStateToProps = ({ events, search }) => ({
   activeFilters: search.activeFilters,
   center: search.center,
   bounds: search.bounds,
-  zoom: search.zoom
+  zoom: search.zoom,
+  chosenZipcode: search.chosenZipcode
 })
 
 const mapDispatchToProps = (dispatch) => ({
