@@ -9,19 +9,20 @@ export default ({
   selectResult,
   handleKeyPress,
   searchQuery,
-  showVolunteer,
+  showVolunteer, 
   showMeet,
   handleFilterChange
 }) => (
     <div className='search-container'>
         <div className='search-viewport'>
             <form className='search-form' onSubmit={() => { return false; }}>
-                <input type='text'
+                <input type='number'
                     className='search-text'
                     placeholder='Enter Zip Code'
                     onChange={handleSearch}
                     onKeyPress={handleKeyPress}
                     value={searchQuery}
+                    maxlength={5}
                 />
             </form>
 
