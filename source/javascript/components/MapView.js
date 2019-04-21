@@ -41,7 +41,7 @@ class MapView extends React.Component {
     renderPopup () {
       const popup = this.props.clickedItem;
       return (
-        <Popup coordinates={[popup.lng, popup.lat]}>
+        <Popup coordinates={[popup[0].lng, popup[0].lat]}>
           <MapPopupItem
             popup={popup}
             handleClosePopup={this.props.handleClosePopup}
@@ -85,7 +85,7 @@ class MapView extends React.Component {
                 {
                   this.props.volunteerData.map((data, ind) => (
                       <Feature key={ind}
-                        coordinates={[data.lng, data.lat]}
+                        coordinates={[data[0].lng, data[0].lat]}
                         onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
                   ))
                 }
@@ -106,7 +106,7 @@ class MapView extends React.Component {
                 {
                   this.props.meetData.map((data, ind) => (
                       <Feature key={ind}
-                        coordinates={[data.lng, data.lat]}
+                        coordinates={[data[0].lng, data[0].lat]}
                         onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
                   ))
                 }

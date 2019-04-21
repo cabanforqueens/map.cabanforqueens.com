@@ -20,9 +20,11 @@ export default ({ data }) => {
                     <h2>{venue[1]}</h2>
                 </div>
             </div>
+            <div className='event-bundled-items'>
             {data.map(item => (
                 <EventSingle data={item} key={item.url} bundled={true}/>
             ))}
+            </div>
         </div>
     );
 };

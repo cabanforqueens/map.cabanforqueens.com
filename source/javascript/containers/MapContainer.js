@@ -55,13 +55,39 @@ class MapContainer extends React.Component {
 }
 
 const mapStateToProps = ({ events, search }) => ({
-  volunteerData: events.eventsData.filter(i => i.event_type == "Volunteer for Tiffany"),
-  meetData: events.eventsData.filter(i => i.event_type == "Meet Tiffany"),
+  volunteerData: Object.values(events.eventsData.filter(i => i.event_type == "Volunteer for Tiffany")
+        .sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))
+        .reduce((acc, curr) => {
+            const key = `${curr.lng},${curr.lat}`;
+            if (acc && !acc[key]) {
+                acc[key] = [curr];
+            } else {
+                acc[key] = [...acc[key], curr]
+            }
+            return acc;
+        }, {})
+    )
+  ,
+  meetData: Object.values(
+            events.eventsData.filter(i => i.event_type == "Meet Tiffany")
+              .sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))
+              .reduce((acc, curr) => {
+                  const key = `${curr.lng},${curr.lat}`;
+                  if (acc && !acc[key]) {
+                      acc[key] = [curr];
+                  } else {
+                      acc[key] = [...acc[key], curr]
+                  }
+                  return acc;
+              }, {})
+          )
+  ,
   activeFilters: search.activeFilters,
   center: search.center,
   bounds: search.bounds,
   zoom: search.zoom,
   chosenZipcode: search.chosenZipcode
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
