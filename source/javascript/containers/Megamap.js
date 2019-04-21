@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Router, Route, Link } from "react-router-dom";
+import ReactPixel from 'react-facebook-pixel'
 
 import { connect } from 'react-redux';
 import i18n from '../hoc/i18n';
@@ -16,13 +17,25 @@ import SearchContainer from './SearchContainer';
 import EventCreationButton from '../components/EventCreationButton'
 import history from '../history';
 
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-132552842-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+
+ReactPixel.init('424082041730388', null, {autoConfig: true, debug: true});
+ReactPixel.track("MapView");
+ReactPixel.track("PageView");
+
+
 class Megamap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
           isMobileNavVisible: false
         }
-      }
+
+
+    }
     
     handleNavClose() {
         // document.getElementsByTagName("html")[0].style.overflow = 'auto';

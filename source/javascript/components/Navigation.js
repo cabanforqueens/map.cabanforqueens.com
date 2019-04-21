@@ -21,7 +21,7 @@ export default ({ handleNavClose, showBigCircle, handleNavOpen, isMobileNavVisib
               <a href='https://cabanforqueens.com/issues'>Issues</a>
             </li>
             <li>
-              <a href='https://cabanforqueens.com/map'>Volunteer</a>
+              <a href='https://map.cabanforqueens.com'>Volunteer</a>
             </li>
             {/* <li>
               <a href='/contact' target='_blank'>Contact</a>
@@ -53,7 +53,7 @@ export default ({ handleNavClose, showBigCircle, handleNavOpen, isMobileNavVisib
                 <a href='https://cabanforqueens.com/issues'>Issues</a>
               </li>
               <li>
-                <a href='https://cabanforqueens.com/map'>Volunteer</a>
+                <a href='https://map.cabanforqueens.com'>Volunteer</a>
               </li>
               <li className='donate-area'>
                 <a href='https://cabanforqueens.com/donate' className='donate-button'>Contribute</a>
