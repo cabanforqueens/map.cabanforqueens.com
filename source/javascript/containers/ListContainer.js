@@ -34,17 +34,7 @@ const mapStateToProps = ({ events, search }) => {
                         {lng: item.lng, lat: item.lat});
 
             })
-            .sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))
-            .reduce((acc, curr) => {
-                const key = `${curr.lng},${curr.lat}`;
-                if (acc && !acc[key]) {
-                    acc[key] = [curr];
-                } else {
-                    acc[key] = [...acc[key], curr]
-                }
-                return acc;
-            }, {})
-            
+            .sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))    
         )
         ,
     };

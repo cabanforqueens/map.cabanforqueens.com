@@ -7,7 +7,7 @@ export default ({ eventsData }) => (
     <div className='event-list-container'>
         <ul className='event-list'>
             {eventsData.map((item) => (
-                <ListItem data={item} key={`${item[0].lng}-${item[0].lat}`}/>
+                <ListItem data={item} key={`${item.lng}-${item.lat}-${item.url}`}/>
             ))}
         </ul>
     </div>
