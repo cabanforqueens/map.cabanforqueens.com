@@ -22,6 +22,11 @@ const defaultState = {
 export default function (state=defaultState, action) {
 
     switch(action.type) {
+        case "SEARCH_RESET_FILTERS":
+          return {
+            ...state, 
+            activeFilters: defaultState.activeFilters
+          }
         case "SEARCH_MAP_IS_LOADED":
           return {
             ...state,

@@ -42,7 +42,7 @@ class SearchContainer extends React.Component {
     if (query.get('types')) {
       this.props.setFilters(query.get('types').split(","));
     } else if (query.get("zipcode")) {
-      this.props.setFilters([]);
+      this.props.resetFilters();
     }
   }
 
@@ -143,6 +143,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setFilters: (filters) => {
       dispatch(searchAction.setFilters(filters))
+    },
+    resetFilters: () => {
+      dispatch(searchAction.resetFilters())
     },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

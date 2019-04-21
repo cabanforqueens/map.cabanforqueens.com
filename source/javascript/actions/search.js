@@ -43,6 +43,12 @@ const search = (zipcode) => {
   }
 }
 
+const resetFilters = () => {
+  return {
+    type: "SEARCH_RESET_FILTERS"
+  }
+}
+
 const updateMap = (bounds = null, center = null, zoom = null) => {
   return {
     type: "SEARCH_UPDATE_MAP_INFORMATION",
@@ -66,5 +72,6 @@ export const searchAction = {
     clearSearchResults,
     selectResult,
     updateMap,
-    setMap
+    setMap,
+    resetFilters
 };
