@@ -222,24 +222,82 @@ gulp.task('publish', function(done) {
   runSequence('publish-js', 'publish-inject', 'prepare-export');
 });
 
-gulp.task('prepare-export', function() {
-  gulp.src('app/index.html')
+gulp.task('prepare-export', function(done) {
+  runSequence('export-javascript', 'export-inject');
+});
+
+gulp.task('export-javascript', function() {
+  return gulp.src('source/javascript/index.js')
+    .pipe(webpack({
+      output: {
+        filename: '[name].js'
+      },
+      mode: 'development',
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ["@babel/env",
+                "@babel/react"]
+              }
+            }
+          },
+          {
+            test: /\.css$/, loader: "style-loader!css-loader"
+          },
+          {
+            test: /\.(png|jpg|gif)$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  outputPath: 'images',
+                  // publicPath: 'images'
+                },
+              },
+            ],
+          },
+        ]
+      },
+      devtool: '#inline-source-map'
+    }))
+    .on('error', swallowError)
+    // .pipe(uglify())
+    // .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
+    // .pipe(rename('main.min.js'))
+    // .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('export-inject', function () {
+
+  var opts = {
+    algorithm: 'sha1',
+    hashLength: 30 + Math.random() * 40,
+    template: '<%= name %><%= ext %>?hash=<%= hash %>'
+  }
+
+  var target = gulp.src('source/html/index.html');
+  // It's not necessary to read the files (will speed up things), we're only after their paths:
+  var sources = gulp.src(['dist/main.js'], {read: false})
+                      .pipe(hash(opts));
+
+  return target.pipe(
+      inject(
+          sources,
+          {
+              ignorePath: 'dist/assets' ,
+              transform: function (filepath, file, i, length) {
+                return "<script src='" + filepath.replace('/dist/', '/') + "'></script>'";
+              }
+          }
+      ), {relative: true}
+    )
     .pipe(gulp.dest('dist'));
-  gulp.src(['public/assets/javascript/main.js'])
-      .pipe(gulp.dest('dist/javascript'));
-
-  gulp.src(['public/assets/stylesheets/**/*'])
-      .pipe(gulp.dest('dist/stylesheets'));
-
-  gulp.src(['public/assets/stylesheets/**/*'])
-      .pipe(gulp.dest('dist/stylesheets'));
-
-  gulp.src(['public/assets/data/**/*'])
-      .pipe(gulp.dest('dist/data'));
-
-      gulp.src(['public/assets/img/**/*',
-                'public/assets/img/*'])
-          .pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('export', function() {
