@@ -182,7 +182,7 @@ gulp.task('inject', function () {
   return target.pipe(inject(sources, { 
                         ignorePath: 'app/assets',
                         transform: function (filepath, file, i, length) {
-                          return "<script src='" + filepath.replace('/app/', '/') + "'></script>'";
+                          return "<script src='" + filepath.replace('/app/', '/') + "'></script>";
                         }
                     }))
     .pipe(gulp.dest('app'));
@@ -205,7 +205,7 @@ gulp.task('publish-inject', function () {
   return target.pipe(inject(sources, { 
                               ignorePath: 'app/assets',
                               transform: function (filepath, file, i, length) {
-                                return "<script src='" + filepath.replace('/app/', '/') + "'></script>'";
+                                return "<script src='" + filepath.replace('/app/', '/') + "'></script>";
                               }
                           }))
                           .pipe(gulp.dest('app'));
@@ -292,7 +292,7 @@ gulp.task('export-inject', function () {
           {
               ignorePath: 'dist/assets' ,
               transform: function (filepath, file, i, length) {
-                return "<script src='" + filepath.replace('/dist/', '/') + "'></script>'";
+                return "<script src='" + filepath.replace('/dist/', '/') + "'></script>";
               }
           }
       ), {relative: true}
