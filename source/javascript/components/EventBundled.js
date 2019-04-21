@@ -1,7 +1,28 @@
 import React from 'react';
-
+import EventSingle from './EventSingle.js';
+import MarkerIcon from '../assets/images/marker.png';
 import './EventBundled.css';
 
-export default ({ data }) => (
-    <div>{ data[0]['start_datetime'] } </div>
-);
+export default ({ data }) => {
+    
+    const venue = data[0].venue.split(".") ;
+    if (venue[0] == "TBD") {
+        let temp = venue[1];
+        venue[0] = venue[1].replace("TBD", "");
+        venue[1] = "Location to be announced";
+    }
+    return (
+        <div className='event-bundled-cont'>
+            <div className='event-bundled-loc'>
+                <img src={MarkerIcon} />
+                <div>
+                    <h1>{venue[0]}</h1>
+                    <h2>{venue[1]}</h2>
+                </div>
+            </div>
+            {data.map(item => (
+                <EventSingle data={item} key={item.url} bundled={true}/>
+            ))}
+        </div>
+    );
+};
