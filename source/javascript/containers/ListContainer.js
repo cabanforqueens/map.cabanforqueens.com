@@ -34,7 +34,9 @@ const mapStateToProps = ({ events, search }) => {
                         search.bounds.southwest,
                         {lng: item.lng, lat: item.lat});
 
-            }).reduce((acc, curr) => {
+            })
+            .sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))
+            .reduce((acc, curr) => {
                 const key = `${curr.lng},${curr.lat}`;
                 if (acc && !acc[key]) {
                     acc[key] = [curr];
@@ -43,6 +45,7 @@ const mapStateToProps = ({ events, search }) => {
                 }
                 return acc;
             }, {})
+            
         )
         ,
     };
