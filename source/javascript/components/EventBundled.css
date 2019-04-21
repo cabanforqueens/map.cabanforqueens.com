@@ -44,12 +44,18 @@
 }
 
 .event-bundled-item.event-list-item-container .event-list-date-data {
-    font-size: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.event-bundled-item.event-list-item-container .event-list-day-data {
+    font-size: 10px;
+    font-weight: 400;
 }
 
 .event-bundled-item.event-list-item-container .event-list-month-data {
     font-size: 11px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .event-list-item-container .event-list-item-desc.event-list-item-event-type {

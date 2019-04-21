@@ -29,6 +29,11 @@
     border-radius: 4px;
     transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+a {
+  text-decoration: none;
+}
+
 /* RESET */
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126

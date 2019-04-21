@@ -7,8 +7,8 @@ import i18n from '../hoc/i18n';
 
 import ListArea from '../components/ListArea';
 import MapArea from '../components/MapArea';
-import Page from '../components/Page';
-
+import {Page, Viewport} from '../components/Page';
+import Navigation from '../components/Navigation';
 import MapContainer from './MapContainer';
 import ListContainer from './ListContainer';
 import SearchContainer from './SearchContainer';
@@ -19,6 +19,21 @@ import history from '../history';
 class Megamap extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+          isMobileNavVisible: false
+        }
+      }
+    
+    handleNavClose() {
+        // document.getElementsByTagName("html")[0].style.overflow = 'auto';
+        // document.getElementsByTagName("body")[0].style.overflow = 'auto';
+        this.setState({ isMobileNavVisible: false });
+    }
+    
+    handleNavOpen() {
+        // document.getElementsByTagName("html")[0].style.overflow = 'hidden';
+        // document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+        this.setState({ isMobileNavVisible: true });
     }
 
     //
@@ -27,14 +42,21 @@ class Megamap extends React.Component {
         return (
             <Router history={history}>
                 <Route exact path="/" render={props => (
+                        
                     <Page>
-                        <ListArea>
-                            <SearchContainer history={history} />
-                            <ListContainer />
-                        </ListArea>
-                        <MapArea>
-                            <MapContainer history={history}  />
-                        </MapArea>
+                        <Navigation 
+                            handleNavOpen={this.handleNavOpen.bind(this)}
+                            handleNavClose={this.handleNavClose.bind(this)}
+                            isMobileNavVisible={this.state.isMobileNavVisible}/>
+                        <Viewport>
+                            <ListArea>
+                                <SearchContainer history={history} />
+                                <ListContainer />
+                            </ListArea>
+                            <MapArea>
+                                <MapContainer history={history}  />
+                            </MapArea>
+                        </Viewport>
                     </Page>
                 )} />
             </Router>
