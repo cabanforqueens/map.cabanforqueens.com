@@ -10,7 +10,6 @@ const inBounds = (ne, sw, lnglat) =>{
 
 class ListContainer extends React.Component {
     render() {
-        console.log("eventsData", this.props.eventsData);
         return (
         <ListView
             eventsData={this.props.eventsData}
