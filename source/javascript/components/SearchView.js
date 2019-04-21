@@ -1,39 +1,43 @@
 import React from 'react';
 import SearchSuggestion from './SearchSuggestion';
 import './SearchView.css';
+import MeetEventsIcon from '../assets/images/meet-events.png';
+import VolunteerEventsIcon from '../assets/images/volunteer-events.png';
 export default ({
   handleSearch,
   searchResults,
   selectResult,
   handleKeyPress,
-  searchQuery
+  searchQuery,
+  showVolunteer, 
+  showMeet,
+  handleFilterChange
 }) => (
     <div className='search-container'>
         <div className='search-viewport'>
             <form className='search-form' onSubmit={() => { return false; }}>
-                <input type='text'
+                <input type='number'
                     className='search-text'
-                    placeholder='City, State, Country, and/or Zip Code'
+                    placeholder='Enter Zip Code'
                     onChange={handleSearch}
                     onKeyPress={handleKeyPress}
                     value={searchQuery}
+                    maxLength={5}
                 />
-                <a href='javascript: void(null)' className='search-btn'>Search</a>
             </form>
 
             <form className='filter-form'>
                 <ul>
                     <li>
-                        <input type="checkbox" name='f[]' value='events' id='events'/>
-                        <label htmlFor='events'><img src='/img/event.png' /><span>Events</span></label>
+                        <input type="checkbox" name='f[]' value='Volunteer for Tiffany' 
+                            id='Volunteer for Tiffany' onChange={handleFilterChange} 
+                            checked={showVolunteer ? "checked" : false}/>
+                        <label htmlFor='Volunteer for Tiffany'><img src={VolunteerEventsIcon} /><span>Volunteer for Tiffany</span></label>
                     </li>
                     <li>
-                        <input type="checkbox" name='f[]' value='local-groups' id='local-groups'/>
-                        <label htmlFor='local-groups'><img src='/img/group.png' /><span>Local Groups</span></label>
-                    </li>
-                    <li>
-                        <input type="checkbox" name='f[]' value='regional-groups' id='regional-groups'/>
-                        <label htmlFor='regional-groups'><img src='/img/flag.png' /><span>Regional Groups</span></label>
+                        <input type="checkbox" name='f[]' onChange={handleFilterChange} 
+                                value='Meet Tiffany' id='Meet Tiffany'  checked={showMeet ? "checked" : false}/>
+                        <label htmlFor='Meet Tiffany'><img src={MeetEventsIcon} /><span>Meet Tiffany</span></label>
                     </li>
 
                 </ul>

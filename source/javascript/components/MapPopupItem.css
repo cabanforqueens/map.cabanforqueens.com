@@ -2,12 +2,18 @@
       min-width: 300px;
       max-width: 350px;
       position: relative;
+      font-family: var(--sans-serif);
+}
+
+.popup-item .event-bundled-items{
+    max-height: 240px;
+    overflow: auto;
 }
 
 .popup-item .popup-close {
     position: absolute;
-    right: 0px;
-    top: -5px;
+    right: 5px;
+    top: 0px;
     text-decoration: none;
     color: black;
     font-weight: 800;
@@ -15,14 +21,16 @@
 }
 .popup-item .header-area {
     padding: 10px;
-    background-color: $light-purple;
+    background-color: var(--light-blue);
 }
 .popup-item .content-area {
     padding: 10px;
+    font-family: var(--sans-serif);
 }
 .popup-item h1 {
     font-size: 18px;
-    font-weight: 800;
+    font-weight: 600;
+    font-family: var(--sans-serif);
 }
 
 .popup-item h1 a {
@@ -44,7 +52,7 @@
 
 .popup-item .sponsor-area {
     padding-bottom: 10px;
-    border-bottom: 1px solid $orange;
+    border-bottom: 1px solid var(--light-blue);
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
@@ -57,14 +65,19 @@
     padding-bottom: 4px;
     line-height: 24px;
 
-    background-color: var(--blue);
-    color: white;
+    background-color: var(--highlight);
+    color: var(--blue);
     text-decoration: none;
     border-radius: 4px;
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 10px;
 
+}
+
+.popup-item a.rsvp:hover {
+    background-color: var(--blue);
+    color: white;
 }
 
 .popup-item p {

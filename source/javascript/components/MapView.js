@@ -1,11 +1,12 @@
 import React from 'react';
 import MapPopupItem from './MapPopupItem';
+import EventCreationButton from './EventCreationButton';
 const ReactMapboxGl = require("react-mapbox-gl");
 import './MapView.css';
 
-const {Layer, Feature, Popup}  = ReactMapboxGl;
+const {Layer, Feature, Popup, ZoomControl}  = ReactMapboxGl;
 
-console.log(ReactMapboxGl);
+
 
 const Map = ReactMapboxGl.Map({
   accessToken:
@@ -18,20 +19,29 @@ class MapView extends React.Component {
     }
 
     componentDidMount() {
-        console.log("this.props.eventsData", this.props.eventsData);
-        console.log("component did mount");
     }
 
     handleStyleLoad(map) {
        this.map = map;
-       map.setCenter({ lng: -73.834, lat: 40.676 });
-       map.setZoom(10);
+      //  map.setCenter({ lng: -73.834, lat: 40.676 });
+      //  map.setZoom(10);
+      
+       map.on('moveend', (event) => {
+        this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
+      });
+
+      this.map = map;
+      
+      this.props.handleMapLoad(map);
+
+      this.props.center && map.setCenter({ lng: this.props.center[0], lat: this.props.center[1] });
+      this.props.center && map.setZoom(14);
     }
 
     renderPopup () {
       const popup = this.props.clickedItem;
       return (
-        <Popup coordinates={[popup.lng, popup.lat]}>
+        <Popup coordinates={[popup[0].lng, popup[0].lat]}>
           <MapPopupItem
             popup={popup}
             handleClosePopup={this.props.handleClosePopup}
@@ -41,7 +51,6 @@ class MapView extends React.Component {
     }
 
     render() {
-      console.log("this.props.clickedItem", this.props.clickedItem);
         return (<div className='map-area'>
           <Map
             ref={e => {
@@ -50,13 +59,23 @@ class MapView extends React.Component {
             onStyleLoad={this.handleStyleLoad.bind(this)}
             style="mapbox://styles/rcscastillo/cjskbazaf34171gnxi5qfdeli"
             className='map-view-container'
+
+            zoom={this.props.zoom || [10]}
+            interactive={true}
+            center={this.props.center || [ -73.834, 40.676]}
+            movingMethod={'easeTo'}
+
             containerStyle={{
               height: "100%",
               width: "100%"
             }}>
+              <ZoomControl position='top-left'/>
               <Layer
                   type="circle"
-                  id="marker"
+                  id="volunteerData"
+                  layout={{
+                    'visibility': this.props.showVolunteer ? 'visible' : 'none',
+                  }}
                   paint={{
                     "circle-radius": 5,
                     "circle-color": "#440099",
@@ -64,13 +83,34 @@ class MapView extends React.Component {
                     "circle-stroke-color": "#ffb900"
                   }}>
                 {
-                  this.props.eventsData.map((data, ind) => (
+                  this.props.volunteerData.map((data, ind) => (
                       <Feature key={ind}
-                        coordinates={[data.lng, data.lat]}
+                        coordinates={[data[0].lng, data[0].lat]}
                         onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
                   ))
                 }
-            </Layer>
+              </Layer>
+
+              <Layer
+                  type="circle"
+                  id="meetData"
+                  layout={{
+                    'visibility': this.props.showMeet ? 'visible' : 'none',
+                  }}
+                  paint={{
+                    "circle-radius": 5,
+                    "circle-color": "#c4b4dd",
+                    "circle-stroke-width": 2,
+                    "circle-stroke-color": "#440099"
+                  }}>
+                {
+                  this.props.meetData.map((data, ind) => (
+                      <Feature key={ind}
+                        coordinates={[data[0].lng, data[0].lat]}
+                        onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
+                  ))
+                }
+              </Layer>
 
             { this.props.clickedItem &&
               this.renderPopup()

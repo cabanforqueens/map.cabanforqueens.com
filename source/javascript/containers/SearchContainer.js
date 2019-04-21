@@ -3,6 +3,7 @@ import React from 'react';
 import SearchView from '../components/SearchView';
 import { connect } from 'react-redux';
 import {searchAction} from '../actions/search';
+import history from '../history';
 
 class SearchContainer extends React.Component {
 
@@ -15,16 +16,50 @@ class SearchContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.props.history.listen((location, action) => {
+      if (action == "POP") {
+        this.handleHistoryChange(location);
+      }
+    });
+
+    if (this.props.history.location.search !== "") {
+      this.handleHistoryChange(this.props.history.location);
+    }
+  }
+
+  handleHistoryChange(location) {
+    const query = new URLSearchParams(location.search);
+
+    if (!query.get("zipcode") & !query.get("types")) {
+      this.props.updateMap(null, [ -73.834, 40.676], [10]);
+    }
+
+    if (query.get("zipcode") && query.get("zipcode").length == 5) {
+      this.setState({searchQuery: query.get("zipcode")})
+      this.props.searchZipcode(query.get("zipcode"));
+    }
+
+    if (query.get('types')) {
+      this.props.setFilters(query.get('types').split(","));
+    } else if (query.get("zipcode")) {
+      this.props.setFilters([]);
+    }
   }
 
   handleSearch(event) {
     this.props.clearSearchResults();
-    clearTimeout(this.geocodeTimeout);
-    this.setState({searchQuery: event.target.value}, () => {
-      this.geocodeTimeout = setTimeout(() => {
-        this.props.searchLocation(this.state.searchQuery);
-      }, 500);
+    this.setState({
+      searchQuery: event.target.value
+    }, () => {
+      if ( this.state.searchQuery.length == 5 ) {
+        this.props.searchZipcode(this.state.searchQuery);
+        this.handleHistoryPush(this.props.activeFilters);
+      }
     })
+  }
+
+  handleHistoryPush(types){
+    history.push(`?zipcode=${this.state.searchQuery}&types=${types.join(',')}`);
   }
 
   handleKeyPress(event) {
@@ -49,6 +84,19 @@ class SearchContainer extends React.Component {
     this.props.selectResult(item);
   }
 
+  handleFilterChange(event) {
+    const filter = event.target.value;
+
+    if ( this.props.activeFilters.includes(filter) ) {
+      //remove filter
+      this.props.setFilters(this.props.activeFilters.filter(i => i !== filter));
+      this.handleHistoryPush(this.props.activeFilters.filter(i => i !== filter));
+    } else { // add filter
+      this.props.setFilters([...this.props.activeFilters, filter]);
+      this.handleHistoryPush([...this.props.activeFilters, filter]);
+    }
+  }
+
   render() {
       return <SearchView
         searchQuery={this.state.searchQuery}
@@ -59,6 +107,9 @@ class SearchContainer extends React.Component {
         handleKeyPress={this.handleKeyPress.bind(this)}
         searchResults={this.props.searchResults}
         selectResult={this.handleSelect.bind(this)}
+        showMeet={this.props.activeFilters.includes("Meet Tiffany")}
+        showVolunteer={this.props.activeFilters.includes("Volunteer for Tiffany")}
+        handleFilterChange={this.handleFilterChange.bind(this)}
       />;
   }
 }
@@ -70,11 +121,18 @@ const mapStateToProps = ({ search }) => ({
     center: search.center,
     searchResults: search.searchResults.results,
     chosenResult: search.chosenResult,
-    bounds: search.bounds
+    bounds: search.bounds,
+
+    chosenZipcode: search.chosenZipcode,
+    zipcodes: search.zipcodes
+
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    searchLocation: (text) => {
+    updateMap: (bounds, center, zoom) => {
+      dispatch(searchAction.updateMap(bounds, center, zoom))
+    },
+    searchZipcode: (text) => {
       dispatch(searchAction.search(text));
     },
     clearSearchResults: () => {
@@ -82,6 +140,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     selectResult: (item) => {
       dispatch(searchAction.selectResult(item))
-    }
+    },
+    setFilters: (filters) => {
+      dispatch(searchAction.setFilters(filters))
+    },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);

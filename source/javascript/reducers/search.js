@@ -5,19 +5,42 @@ import {
   SEARCH_ERROR_RESULTS,
   SEARCH_SET_SELECTED_RESULT } from '../actions/actionTypes';
 
+import zipcodes from '../assets/data/zipcodes.json';
+
 const defaultState = {
     searchQuery: '',
-    activeFilters: ['events', 'local-groups', 'regional-groups'],
-    zoomLevel: 10,
-    center: {lat: 0, lng: 0},
-    bounds: {},
+    activeFilters: ['Volunteer for Tiffany', 'Meet Tiffany'],
+    zoom: null,
+    center: null,
+    bounds: null,
     searchResults: [],
-    chosenResult: null
+    chosenResult: null,
+    zipcodes: zipcodes,
+    chosenZipcode: null
 };
 
 export default function (state=defaultState, action) {
 
     switch(action.type) {
+        case "SEARCH_MAP_IS_LOADED":
+          return {
+            ...state,
+            map: action.data
+          }
+        case "SEARCH_UPDATE_MAP_INFORMATION":
+          return {
+            ...state,
+            zoom: action.data.zoom || state.zoom,
+            center: action.data.center || state.center,
+            bounds: action.data.bounds || state.bounds
+          }
+        case "SEARCH_SELECT_ZIPCODE":
+          return {
+            ...state, 
+            chosenZipcode: action.zipcode,
+            zoom: [14],
+            center: state.zipcodes[action.zipcode] && state.zipcodes[action.zipcode],
+          }
         case SEARCH_SET_QUERY:
           return {
               ...state,
