@@ -20,19 +20,14 @@ export default ({ bundled = false, data :
 
         </div>
         <div className='event-list-item-info'>
-            {!bundled && <div className='event-list-item-type'>
-                <span>{event_type == "groups" ?
-                    supergroup : (campaign_title || event_type)}
-                </span>
-            </div>}
             <h2 className='event-list-item-title'>
                 <a href={url || website} target='_blank'>{name || title}</a>
             </h2>
-            {bundled && <div className='event-list-item-desc event-list-item-event-type'>
+            <div className='event-list-item-desc event-list-item-event-type'>
                 {event_type}
-            </div>}
+            </div>
             <div className='event-list-item-desc'>
-                <img src={ClockIcon} className='event-list-icon' /> <Moment className='event-list-tim-data' format="h:mm a" add={{ hours: 4 }}>{ start_datetime }</Moment>
+                <img src={ClockIcon} className='event-list-icon' /> <Moment className='event-list-time-data' format="h:mm a" add={{ hours: 4 }}>{ start_datetime }</Moment>
             </div>
             {!bundled && <div className='event-list-item-desc'>
                 <img src={MarkerIcon} className='event-list-icon' />  <span>{location || venue}</span> 

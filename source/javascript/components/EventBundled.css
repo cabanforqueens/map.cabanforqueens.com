@@ -51,7 +51,7 @@
     letter-spacing: 2px;
 }
 
-.event-bundled-item.event-list-item-container .event-list-item-desc {
+.event-list-item-container .event-list-item-desc.event-list-item-event-type {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
