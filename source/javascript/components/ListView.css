@@ -1,7 +1,7 @@
 
 .event-list-container {
     flex-grow: 1;
-    background-color: whitesmoke; 
+    background-color: white; 
     overflow: auto;
 
     -webkit-overflow-scrolling: touch;

@@ -29,38 +29,33 @@ const clearSearchResults = ()=> {
 }
 
 const selectResult = (item) => {
-  console.log("~~~> ITEM __>", item);
+  
   return {
     type: SEARCH_SET_SELECTED_RESULT,
     data: item
   }
 }
 
-const search = (text) => {
-  return (dispatch) => {
-  // this.geocodeTimeout = setTimeout(() => {
-    dispatch({
-      type: SEARCH_SET_QUERY,
-      data: text
-    });
+const search = (zipcode) => {
+  return {
+    type: "SEARCH_SELECT_ZIPCODE",
+    zipcode
+  }
+}
 
-    Geocode.fromAddress(text).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        return dispatch({
-            type: SEARCH_SET_RESULTS,
-            data: response
-        });
-      },
-      error => {
-        console.log("HERE", error);
-        return dispatch({
-            type: SEARCH_ERROR_RESULTS,
-            data: error
-        });
-      }
-    );
-  // }, 500);
+const updateMap = (bounds = null, center = null, zoom = null) => {
+  return {
+    type: "SEARCH_UPDATE_MAP_INFORMATION",
+    data: {
+      bounds, center, zoom
+    }
+  }
+}
+
+const setMap = (map) => {
+  return {
+    type: "SEARCH_MAP_IS_LOADED",
+    data: map
   }
 }
 
@@ -69,5 +64,7 @@ export const searchAction = {
     setFilters,
     search,
     clearSearchResults,
-    selectResult
+    selectResult,
+    updateMap,
+    setMap
 };

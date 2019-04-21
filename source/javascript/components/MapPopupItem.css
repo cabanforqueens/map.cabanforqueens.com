@@ -5,6 +5,11 @@
       font-family: var(--sans-serif);
 }
 
+.popup-item .event-bundled-items{
+    max-height: 240px;
+    overflow: auto;
+}
+
 .popup-item .popup-close {
     position: absolute;
     right: 5px;

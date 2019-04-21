@@ -1,1 +1,0 @@
-//Aggregated Data of Events & Groups
