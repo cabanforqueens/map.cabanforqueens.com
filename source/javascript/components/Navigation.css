@@ -10,9 +10,9 @@
     align-items: center;
     /* position: fixed; */
     z-index: 1000;
-    -webkit-backface-visibility: hidden;    
+    -webkit-backface-visibility: hidden;
     background-color: #283475;
-    
+
 }
 
 .navigation .navigation-area a.logo-area {
@@ -44,8 +44,8 @@
     display: flex;
     flex-direction: row;
 
-    
-}   
+
+}
 
 .navigation nav ul.link-list li {
     margin-left: 25px;
@@ -101,7 +101,7 @@
         font-size: 12px;
     }
 
-    
+
     .navigation nav ul.link-list li.mobile-nav-open {
       display: block !important;
       padding: 0 10px 0 0;
@@ -116,7 +116,7 @@
         background-color: var(--blue);
         top: 0;
         left: 0;
-        display: block;        
+        display: block;
     }
 
     .navigation nav.mobile-nav .mobile-nav-viewport {
@@ -135,7 +135,7 @@
         right: 10px;
         color: white;
     }
-    
+
     .navigation nav.mobile-nav ul {
         transform: translateY(-20%);
     }
@@ -155,7 +155,8 @@
 }
 
 .navigation .donate-button {
-    background-color: #a176d1!important;
+    background-color: #DB3E3E !important;
+
     color: #fff!important;
     font-size: 16px!important;
     text-transform: uppercase;
@@ -169,6 +170,10 @@
     font-weight: 800;
     letter-spacing: .5px;
     color: #fff;
+}
+
+.navigation .donate-button:hover {
+  background-color: #b73333 !important;
 }
 
 /*Medium Screen*/
