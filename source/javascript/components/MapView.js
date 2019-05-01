@@ -25,13 +25,13 @@ class MapView extends React.Component {
        this.map = map;
       //  map.setCenter({ lng: -73.834, lat: 40.676 });
       //  map.setZoom(10);
-      
+
        map.on('moveend', (event) => {
         this.props.handleMapChange(map.getBounds(), map.getCenter(), map.getZoom())
       });
 
       this.map = map;
-      
+
       this.props.handleMapLoad(map);
 
       this.props.center && map.setCenter({ lng: this.props.center[0], lat: this.props.center[1] });
@@ -99,9 +99,9 @@ class MapView extends React.Component {
                   }}
                   paint={{
                     "circle-radius": 5,
-                    "circle-color": "#c4b4dd",
+                    "circle-color": "#440099",
                     "circle-stroke-width": 2,
-                    "circle-stroke-color": "#440099"
+                    "circle-stroke-color": "#ffb900"
                   }}>
                 {
                   this.props.meetData.map((data, ind) => (
