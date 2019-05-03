@@ -24,6 +24,9 @@ export default ({ handleNavClose, showBigCircle, handleNavOpen, isMobileNavVisib
               <a href='https://cabanforqueens.com/endorsements'>Endorsements</a>
             </li>
             <li>
+              <a href='https://store.cabanforqueens.com?ref=website'>Store</a>
+            </li>
+            <li>
               <a href='https://map.cabanforqueens.com'>Volunteer</a>
             </li>
             {/* <li>
@@ -54,6 +57,9 @@ export default ({ handleNavClose, showBigCircle, handleNavOpen, isMobileNavVisib
               <li><a href='https://cabanforqueens.com/about'>About</a></li>
               <li>
                 <a href='https://cabanforqueens.com/issues'>Issues</a>
+              </li>
+              <li>
+                <a href='https://store.cabanforqueens.com?ref=website'>Store</a>
               </li>
               <li>
                 <a href='https://cabanforqueens.com/map'>Volunteer</a>
