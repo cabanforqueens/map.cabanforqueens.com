@@ -33,7 +33,7 @@ export default ({ handleNavClose, showBigCircle, handleNavOpen, isMobileNavVisib
               <a href='/contact' target='_blank'>Contact</a>
             </li> */}
             <li className='donate-area'>
-              <a href='https://cabanforqueens.com/donate' className='donate-button'>Contribute</a>
+              <a href='https://secure.actblue.com/donate/people-powered-justice-for-queens?refcode=map&amount=27' className='donate-button'>Contribute</a>
             </li>
             <li className='mobile-nav-open'>
               <a href='javascript: void(null)' onClick={handleNavOpen}>
