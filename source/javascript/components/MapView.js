@@ -99,9 +99,9 @@ class MapView extends React.Component {
                   }}
                   paint={{
                     "circle-radius": 5,
-                    "circle-color": "#440099",
+                    "circle-color": "#c4b4dd",
                     "circle-stroke-width": 2,
-                    "circle-stroke-color": "#ffb900"
+                    "circle-stroke-color": "#5e2ba6"
                   }}>
                 {
                   this.props.meetData.map((data, ind) => (
