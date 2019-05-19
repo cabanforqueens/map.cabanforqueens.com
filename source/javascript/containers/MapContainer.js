@@ -35,12 +35,14 @@ class MapContainer extends React.Component {
         return (<MapView
           volunteerData={this.props.volunteerData}
           meetData={this.props.meetData}
+          phonebankData={this.props.phonebankData}
           handleFeatureClick={this.handleFeatureClick.bind(this)}
           clickedItem={this.state.clickedItem}
           handleClosePopup= {this.handleClosePopup.bind(this)}
 
           showMeet={this.props.activeFilters.includes("Meet Tiffany")}
           showVolunteer={this.props.activeFilters.includes("Volunteer for Tiffany")}
+          showPhonebank={this.props.activeFilters.includes("Phonebank/Text for Tiffany")}
 
           center={this.props.center}
           bounds={this.props.bounds}
@@ -81,6 +83,19 @@ const mapStateToProps = ({ events, search }) => ({
                   return acc;
               }, {})
           )
+  ,
+  phonebankData: Object.values(events.eventsData.filter(i => i.event_type == "Phonebank/Text for Tiffany")
+        .sort((a, b) => new Date(a.start_datetime) - new Date(b.start_datetime))
+        .reduce((acc, curr) => {
+            const key = `${curr.lng},${curr.lat}`;
+            if (acc && !acc[key]) {
+                acc[key] = [curr];
+            } else {
+                acc[key] = [...acc[key], curr]
+            }
+            return acc;
+        }, {})
+    )
   ,
   activeFilters: search.activeFilters,
   center: search.center,

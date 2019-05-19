@@ -112,6 +112,27 @@ class MapView extends React.Component {
                 }
               </Layer>
 
+              <Layer
+                  type="circle"
+                  id="phonebankData"
+                  layout={{
+                    'visibility': this.props.showPhonebank ? 'visible' : 'none',
+                  }}
+                  paint={{
+                    "circle-radius": 5,
+                    "circle-color": "#440099",
+                    "circle-stroke-width": 2,
+                    "circle-stroke-color": "#ffb900"
+                  }}>
+                {
+                  this.props.phonebankData.map((data, ind) => (
+                      <Feature key={ind}
+                        coordinates={[data[0].lng, data[0].lat]}
+                        onClick={(e)=>{ this.props.handleFeatureClick(data); }}/>
+                  ))
+                }
+              </Layer>
+
             { this.props.clickedItem &&
               this.renderPopup()
             }
