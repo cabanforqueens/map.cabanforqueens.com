@@ -16,6 +16,7 @@ import SearchContainer from './SearchContainer';
 
 import EventCreationButton from '../components/EventCreationButton'
 import history from '../history';
+import { eventsAction } from '../actions/events';
 
 import ReactGA from 'react-ga';
 
@@ -36,13 +37,17 @@ class Megamap extends React.Component {
 
 
     }
+
+    componentDidMount() {
+      this.props.loadEvents();
+    }
     
     handleNavClose() {
         // document.getElementsByTagName("html")[0].style.overflow = 'auto';
         // document.getElementsByTagName("body")[0].style.overflow = 'auto';
         this.setState({ isMobileNavVisible: false });
     }
-    
+
     handleNavOpen() {
         // document.getElementsByTagName("html")[0].style.overflow = 'hidden';
         // document.getElementsByTagName("body")[0].style.overflow = 'hidden';
@@ -55,9 +60,9 @@ class Megamap extends React.Component {
         return (
             <Router history={history}>
                 <Route exact path="/" render={props => (
-                        
+
                     <Page>
-                        <Navigation 
+                        <Navigation
                             handleNavOpen={this.handleNavOpen.bind(this)}
                             handleNavClose={this.handleNavClose.bind(this)}
                             isMobileNavVisible={this.state.isMobileNavVisible}/>
@@ -77,4 +82,10 @@ class Megamap extends React.Component {
     }
 }
 
-export default i18n(Megamap);
+const mapDispatchToProps = (dispatch) => ({
+    loadEvents: () => {
+      dispatch(eventsAction.loadEvents());
+    }
+});
+
+export default connect(null, mapDispatchToProps)(Megamap);
