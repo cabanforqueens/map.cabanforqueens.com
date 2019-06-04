@@ -16,12 +16,18 @@ const defaultState = {
     searchResults: [],
     chosenResult: null,
     zipcodes: zipcodes,
-    chosenZipcode: null
+    chosenZipcode: null,
+    sourceParam: null
 };
 
 export default function (state=defaultState, action) {
 
     switch(action.type) {
+        case "UPDATE_SOURCE_PARAM":
+          return { 
+            ...state, 
+            sourceParam: action.data.source
+          }
         case "SEARCH_RESET_FILTERS":
           return {
             ...state, 

@@ -5,7 +5,7 @@ import ClockIcon from '../assets/images/clock.png';
 import MarkerIcon from '../assets/images/marker.png';
 import './EventSingle.css';
 
-export default ({ bundled = false, data :
+export default ({ bundled = false, sourceParam, data :
     {title, url, venue, event_type, description, location,
     start_datetime, supergroup, campaign_title, name, website, group, group_url}
 }) => (
@@ -21,7 +21,7 @@ export default ({ bundled = false, data :
         </div>
         <div className='event-list-item-info'>
             <h2 className='event-list-item-title'>
-                <a href={url || website} target='_blank'>{name || title}</a>
+                <a href={`${url || website}${ sourceParam && `?source=${sourceParam}`}`} target='_blank'>{name || title}</a>
             </h2>
             <div className='event-list-item-desc event-list-item-event-type'>
                 {event_type}

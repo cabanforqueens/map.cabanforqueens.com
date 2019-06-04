@@ -52,6 +52,7 @@ class MapContainer extends React.Component {
           handleMapLoad={this.handleMapLoad.bind(this)}
 
           history={this.props.history}
+          sourceParam={this.props.sourceParam}
         />);
     }
 }
@@ -101,8 +102,8 @@ const mapStateToProps = ({ events, search }) => ({
   center: search.center,
   bounds: search.bounds,
   zoom: search.zoom,
-  chosenZipcode: search.chosenZipcode
-
+  chosenZipcode: search.chosenZipcode,
+  sourceParam: search.sourceParam
 })
 
 const mapDispatchToProps = (dispatch) => ({

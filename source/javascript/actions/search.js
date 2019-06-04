@@ -12,6 +12,10 @@ Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.enableDebug();
 
 
+const updateSourceParam = (source) => ({
+  type: "UPDATE_SOURCE_PARAM", 
+  data: { source }
+});
 
 const setFilters = (filters) => {
 
@@ -73,5 +77,6 @@ export const searchAction = {
     selectResult,
     updateMap,
     setMap,
-    resetFilters
+    resetFilters,
+    updateSourceParam
 };

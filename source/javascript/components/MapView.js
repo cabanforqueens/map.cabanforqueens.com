@@ -45,6 +45,7 @@ class MapView extends React.Component {
           <MapPopupItem
             popup={popup}
             handleClosePopup={this.props.handleClosePopup}
+            sourceParam={this.props.sourceParam}
           />
         </Popup>
       )

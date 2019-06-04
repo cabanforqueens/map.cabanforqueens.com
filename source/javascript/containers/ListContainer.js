@@ -13,6 +13,7 @@ class ListContainer extends React.Component {
         return (
         <ListView
             eventsData={this.props.eventsData}
+            sourceParam={this.props.sourceParam}
         />
         );
     }
@@ -20,6 +21,7 @@ class ListContainer extends React.Component {
 
 const mapStateToProps = ({ events, search }) => {
     return {
+        sourceParam: search.sourceParam,
         eventsData: Object.values(
             events.eventsData.filter(item => {
                 const show = search.activeFilters.includes(item.event_type)
@@ -39,5 +41,6 @@ const mapStateToProps = ({ events, search }) => {
         ,
     };
 }
+
 
 export default connect(mapStateToProps)(ListContainer);

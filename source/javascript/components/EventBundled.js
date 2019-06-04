@@ -3,7 +3,7 @@ import EventSingle from './EventSingle.js';
 import MarkerIcon from '../assets/images/marker.png';
 import './EventBundled.css';
 
-export default ({ data }) => {
+export default ({ sourceParam, data }) => {
     
     const venue = data[0].venue.split(".") ;
     if (venue[0] == "TBD") {
@@ -22,7 +22,7 @@ export default ({ data }) => {
             </div>
             <div className='event-bundled-items'>
             {data.map(item => (
-                <EventSingle data={item} key={item.url} bundled={true}/>
+                <EventSingle data={item} key={`${item.url}${sourceParam && `?source=${sourceParam}`}`} bundled={true}/>
             ))}
             </div>
         </div>

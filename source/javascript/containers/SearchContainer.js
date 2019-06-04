@@ -29,9 +29,14 @@ class SearchContainer extends React.Component {
 
   handleHistoryChange(location) {
     const query = new URLSearchParams(location.search);
+    
+    if (query.get("source")) {
+      this.props.updateSourceParam(query.get("source"));
+    }
 
-    if (!query.get("zipcode") & !query.get("types")) {
-      this.props.updateMap(null, [ -73.834, 40.676], [10]);
+    if (!query.get("zipcode") && !query.get("types")) {
+      console.log("TEST");;
+      // this.props.updateMap(null, [ -73.834, 40.676], [10]);
     }
 
     if (query.get("zipcode") && query.get("zipcode").length == 5) {
@@ -129,6 +134,7 @@ const mapStateToProps = ({ search }) => ({
   });
 
 const mapDispatchToProps = (dispatch) => ({
+    updateSourceParam: (source) => dispatch(searchAction.updateSourceParam(source)),
     updateMap: (bounds, center, zoom) => {
       dispatch(searchAction.updateMap(bounds, center, zoom))
     },
