@@ -39,6 +39,7 @@ class MapView extends React.Component {
     }
 
     renderPopup () {
+      console.log(this.props.sourceParam , "ZZZ ", this.props);
       const popup = this.props.clickedItem;
       return (
         <Popup coordinates={[popup[0].lng, popup[0].lat]}>

@@ -11,6 +11,7 @@ export default ({ sourceParam, data }) => {
         venue[0] = venue[1].replace("TBD", "");
         venue[1] = "Location to be announced";
     }
+    console.log("~~~~ sourceParam ~~~", sourceParam)
     return (
         <div className='event-bundled-cont'>
             <div className='event-bundled-loc'>
@@ -22,7 +23,7 @@ export default ({ sourceParam, data }) => {
             </div>
             <div className='event-bundled-items'>
             {data.map(item => (
-                <EventSingle data={item} key={`${item.url}${sourceParam && `?source=${sourceParam}`}`} bundled={true}/>
+                <EventSingle data={item} key={item.url} sourceParam={sourceParam} bundled={true}/>
             ))}
             </div>
         </div>

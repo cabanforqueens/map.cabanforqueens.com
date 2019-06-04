@@ -64,7 +64,9 @@ class SearchContainer extends React.Component {
   }
 
   handleHistoryPush(types){
-    history.push(`?zipcode=${this.state.searchQuery}&types=${types.join(',')}`);
+    const source = this.props.source;
+    console.log(types);
+    history.push(`?q=${this.state.searchQuery?`&zipcode=${this.state.searchQuery}`:''}${types&&types.length>0?`&types=${types.join(',')}`:''}${source?`&source=${source}`:''}`);
   }
 
   handleKeyPress(event) {
@@ -129,8 +131,8 @@ const mapStateToProps = ({ search }) => ({
     bounds: search.bounds,
 
     chosenZipcode: search.chosenZipcode,
-    zipcodes: search.zipcodes
-
+    zipcodes: search.zipcodes,
+    source: search.sourceParam
   });
 
 const mapDispatchToProps = (dispatch) => ({

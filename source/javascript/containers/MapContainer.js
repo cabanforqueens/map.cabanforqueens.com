@@ -1,6 +1,5 @@
 import React from 'react';
 import MapView from '../components/MapView';
-import MapPopupItem from '../components/MapPopupItem';
 import {searchAction} from '../actions/search';
 
 import { connect } from 'react-redux';
@@ -32,6 +31,7 @@ class MapContainer extends React.Component {
     }
 
     render() {
+      console.log("sourceParam ~~~>", this.props.sourceParam);
         return (<MapView
           volunteerData={this.props.volunteerData}
           meetData={this.props.meetData}
@@ -53,6 +53,7 @@ class MapContainer extends React.Component {
 
           history={this.props.history}
           sourceParam={this.props.sourceParam}
+          
         />);
     }
 }
